@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 const Post = require('../models/post.model');
 const Comment = require('../models/comment.model');
+const Product = require('../models/product.model')
 const postData = require('../data/posts.json');
+const productData = require('../data/products.json');
 
 require('../config/db.config');
 
+/*
 mongoose.connection.once('open', () => {
   console.info(`*** Connected to the database ${mongoose.connection.db.databaseName} ***`);
   mongoose.connection.db.dropDatabase()
@@ -29,5 +32,17 @@ mongoose.connection.once('open', () => {
     .catch(error => console.error(error))
     .then(() => process.exit(0))
 })
+*/
 
-
+mongoose.connection.once('open', () => {
+    console.info(`*** Connected to the database ${mongoose.connection.db.databaseName} ***`);
+    mongoose.connection.db.dropDatabase()
+        .then(() => console.log(`- Database dropped`))
+        .then(() => Product.create(productData))
+        .then(products => {
+            console.info(`- Added ${products.length} products`);
+        })
+        .then(() => console.info(`- All data created!`))
+        .catch(error => console.error(error))
+        .then(() => process.exit(0))
+})
