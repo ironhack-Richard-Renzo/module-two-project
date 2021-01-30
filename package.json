@@ -1,0 +1,37 @@
+{
+  "name": "christmas-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon -e hbs,js,css app.js",
+    "seeds": "node bin/seeds.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "hbs": "^4.1.1",
+    "http-errors": "^1.8.0",
+    "mongoose": "^5.11.11",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.4.17"
+  },
+  "devDependencies": {
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.1"
+  }
+}
