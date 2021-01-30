@@ -24,7 +24,7 @@ module.exports.doRegister = (req, res, next) => {
         return User.create(req.body).then((user) => {
           mailer.sendValidationEmail(user.email, user.verified.token, user.name);
 
-          res.render('users/login', { verification: true });
+          res.render('users/login', { layout:'loginLayout.hbs', verification: true });
         });
       }
     })
