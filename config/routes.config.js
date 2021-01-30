@@ -4,6 +4,7 @@ const postsController = require('../controllers/posts.controller');
 const commentsController = require('../controllers/comments.controller');
 const usersController = require('../controllers/users.controller');
 const secure = require('../middlewares/secure.middleware');
+const productsController = require('../controllers/products.controller')
 
 router.get('/posts', secure.isAuthenticated, postsController.list);
 router.get('/posts/new', secure.isAuthenticated, postsController.create);
@@ -21,6 +22,17 @@ router.post('/register', usersController.doRegister);
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
 
-router.get('/', (req, res) => res.redirect('/posts'));
+// Routes for products
+router.get('/products', secure.isAuthenticated, productsController.list);
+router.get('/products/new', secure.isAuthenticated, productsController.create);
+router.post('/products', secure.isAuthenticated, productsController.doCreate);
+router.get('/products/:id', secure.isAuthenticated, productsController.detail);
+router.get('/products/:id/edit', secure.isAuthenticated, productsController.edit);
+router.post('/products/:id/edit', secure.isAuthenticated, productsController.doEdit);
+router.post('/products/:id/delete', secure.isAuthenticated, productsController.delete);
+
+
+//router.get('/', (req, res) => res.redirect('/posts'));
+router.get('/', (req, res) => res.redirect('/products'));
 
 module.exports = router;
