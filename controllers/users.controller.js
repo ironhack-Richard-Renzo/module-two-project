@@ -4,12 +4,13 @@ const User = require('../models/user.model');
 const mailer = require('../config/mailer.config');
 
 module.exports.register = (req, res, next) => {
-  res.render('users/register');
+  res.render('users/register', { layout:'loginLayout.hbs' });
 };
 
 module.exports.doRegister = (req, res, next) => {
   function renderWithErrors(errors) {
     res.status(400).render('users/register', {
+      layout:'loginLayout.hbs',
       user: req.body,
       errors: errors,
     });
@@ -37,7 +38,7 @@ module.exports.doRegister = (req, res, next) => {
 };
 
 module.exports.login = (req, res, next) => {
-  res.render('users/login');
+  res.render('users/login', {layout: 'loginLayout.hbs'});
 };
 
 module.exports.doLogin = (req, res, next) => {
@@ -50,11 +51,11 @@ module.exports.doLogin = (req, res, next) => {
 
             res.redirect('/');
           } else {
-            res.render('users/login', { user: req.body, errors: { password: 'invalid password' } });
+            res.render('users/login', { layout:'loginLayout.hbs', user: req.body, errors: { password: 'invalid password' } });
           }
         });
       } else {
-        res.render('users/login', { user: req.body, errors: { email: 'user not found or not verified' } });
+        res.render('users/login', { layout:'loginLayout.hbs', user: req.body, errors: { email: 'user not found or not verified' } });
       }
     })
     .catch(next);

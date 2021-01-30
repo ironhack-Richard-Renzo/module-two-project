@@ -1,5 +1,23 @@
 <div class="login-content">
-  <div></div>
+  <div class="login-background">
+    <h1 style="font-size:60px;">Welcome to Module2</h1>
+    <p>hello</p>
+  </div>
+  <div>
+    <h2>Log In</h2>
+    <form action="/login" method="post" class="login-form">
+      <input type="text" name="email" placeholder="user@example.com" value="{{ user.email }}">
+      <input type="password" name="password" placeholder="Password">
+      <button type="submit">Continue</button>
+    </form>
+    <hr>
+    <a href="/register">Sign In</a>
+  </div>
+</div>
+
+
+
+{{!-- 
   <div class="row">
   <div class="col-12 col-sm-4 mx-auto">
     {{#if verification}}
@@ -31,6 +49,5 @@
     </form>
     <hr>
     <a class="btn btn-primary btn-block" href="/register">Register</a>
-  </div>
-</div>
+  </div> --}}
 </div>
