@@ -12,7 +12,10 @@ const productSchema = new Schema({
         type: String,
         default: 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'
     },
-    price: Number,
+    prices: {
+        type: [Number],
+        default: null
+    },
     webs: {
         type: [String],
         default: null
@@ -25,7 +28,15 @@ const productSchema = new Schema({
     brand: {
         type: String,
         default: null
-    }
+    },
+    latitude: {
+        type: Number,
+        default: null
+    },
+    longitud: {
+        type: Number,
+        default: null
+    },
 });
 
 productSchema.pre('save', function(next) {
