@@ -3,7 +3,7 @@ const Post = require('../models/post.model');
 const Comment = require('../models/comment.model');
 const Product = require('../models/product.model')
 const postData = require('../data/posts.json');
-const productData = require('../data/products.json');
+const productData = require('../data/fake-products');
 
 require('../config/db.config');
 

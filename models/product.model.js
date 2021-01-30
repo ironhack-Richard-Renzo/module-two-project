@@ -13,7 +13,7 @@ const productSchema = new Schema({
         default: 'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'
     },
     prices: {
-        type: [Number],
+        type: [String],
         default: null
     },
     webs: {
@@ -21,9 +21,9 @@ const productSchema = new Schema({
         default: null
     },
     category: {
-        type: String,
-        required: 'Product category is mandatory',
-        enum: ['Mobile', 'Clothes', 'Home', 'Tools', 'Videogames']
+        type: String
+            //required: 'Product category is mandatory',
+            //enum: ['Mobile', 'Clothes', 'Home', 'Tools', 'Videogames']
     },
     brand: {
         type: String,
