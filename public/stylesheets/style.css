@@ -6,7 +6,44 @@
   margin: 0 auto;
 }
 
+/* Login Page and Register Page */
+
 .login-content {
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.login-content div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 80px;
+}
+
+.login-background {
+  background-image: url("https://source.unsplash.com/user/pawel_czerwinski");
+  background-size: cover;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form input {
+  border: none;
+  border-bottom: solid 3px;
+}
+
+.login-form button {
+  background-color: #1a1a1a;
+  color: #fafafa;
+  font-size: 22px;
+  border: solid 3px;
+}
+
+.login-form input, .login-form button {
+  padding: 20px;
+  margin: 20px 0;
 }
