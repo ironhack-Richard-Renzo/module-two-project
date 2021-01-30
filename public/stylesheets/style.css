@@ -7,7 +7,6 @@
 }
 
 /* Login Page and Register Page */
-
 .login-content {
   height: 100vh;
   display: grid;
@@ -22,7 +21,7 @@
 }
 
 .login-background {
-  background-image: url("https://source.unsplash.com/user/pawel_czerwinski");
+  background-image: url("../loginImg.jpg");
   background-size: cover;
 }
 
@@ -46,4 +45,9 @@
 .login-form input, .login-form button {
   padding: 20px;
   margin: 20px 0;
+}
+
+.login-content span.invalid {
+  padding: 10px 20px;
+  background-color: #ffbdbd;
 }
