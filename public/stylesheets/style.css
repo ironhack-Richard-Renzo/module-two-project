@@ -5,3 +5,8 @@
 .input-group-text i {
   margin: 0 auto;
 }
+
+.login-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
