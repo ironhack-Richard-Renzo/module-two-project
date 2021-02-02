@@ -1,11 +1,8 @@
-.input-group-text {
-  min-width: 42px;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-
-.input-group-text i {
-  margin: 0 auto;
-}
-
 /* Login Page and Register Page */
 .login-content {
   height: 100vh;
@@ -50,4 +47,15 @@
 .login-content span.invalid {
   padding: 10px 20px;
   background-color: #ffbdbd;
+}
+
+/* Profile Page */
+.profile header section {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.profile header section div ul {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
 }

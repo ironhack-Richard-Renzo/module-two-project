@@ -4,10 +4,13 @@ const createError = require('http-errors');
 const express = require('express');
 const logger = require('morgan');
 const path = require('path');
+const passport = require('passport');
 
 require('./config/hbs.config');
 require('./config/db.config');
 const session = require('./config/session.config');
+require('./config/passport.config');
+
 const app = express();
 
 /**
@@ -17,9 +20,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(session);
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use((req, res, next) => {
   // la variable path se podrá usar desde cualquier vista de hbs (/register, /posts)
   res.locals.path = req.path;
+  res.locals.currentUser = req.user;
+
+  // const flashData = req.flash('data')
+  //   .reduce((data, message) => {
+  //     return {...data, ...JSON.parse(message)}
+  //   }, {});
+  // Object.assign(res.locals, flashData);
+
   next();
 });
 

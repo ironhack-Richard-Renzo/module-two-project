@@ -11,6 +11,9 @@ const userSchema = new Schema(
       required: 'User name is mandatory',
       trim: true,
     },
+    description: {
+      type: String,
+    },
     email: {
       type: String,
       required: 'Email is required',
@@ -36,6 +39,16 @@ const userSchema = new Schema(
           Math.random().toString(36).substr(2),
       },
     },
+    avatar: {
+      type: String,
+      default: function() {
+        return `https://i.pravatar.cc/150?u=${this.id}`
+      }
+    },
+    wishlist: [{
+      type: Schema.Types.ObjectId,
+      rel: 'Product'
+    }]
   },
   { timestamps: true },
 );
