@@ -2,24 +2,32 @@
         "name": "NASA",
         "image": "https://picsum.photos/id/1002/800/600",
         "description": "Proin at lorem libero. Sed euismod accumsan orci eu eleifend. Sed erat tortor, posuere gravida dolor sed, eleifend auctor elit. Curabitur neque eros, pellentesque vitae dolor sed, ultrices maximus lectus. Integer elementum, ex eget venenatis ornare, augue nulla maximus lectus, id hendrerit augue diam eu ex. Donec sed velit nisi. Suspendisse potenti. Duis fermentum vitae leo sed sodales. Phasellus egestas et nulla pretium finibus. Nulla et finibus enim. Proin vehicula enim egestas maximus maximus.",
-        "prices": [300, 345, 500],
-        "webs": [],
+        "price": 300,
+        "web": "",
         "category": "Mobile"
     },
     {
         "name": "River",
         "image": "https://picsum.photos/id/1039/800/600",
         "description": "Sed quam magna, lobortis et felis sit amet, volutpat pulvinar purus. Fusce vitae diam sed neque blandit hendrerit at eu dolor. Nullam auctor vulputate placerat. Mauris at vehicula ligula. Nam eget quam sed augue finibus vehicula. Cras eu suscipit eros. Aliquam tristique convallis euismod. Ut scelerisque nunc sit amet odio consectetur tristique. Phasellus ante mi, vestibulum eget imperdiet non, porttitor id risus. Sed tincidunt consectetur consectetur.",
-        "prices": [20, 25, 40],
-        "webs": [],
+        "price": 20,
+        "web": "",
         "category": "Home"
     },
     {
         "name": "Dog",
         "image": "https://picsum.photos/id/1025/800/600",
         "description": "Nunc suscipit, mi ut gravida euismod, nulla nisi iaculis massa, vitae congue massa libero sit amet urna. Integer vulputate aliquet imperdiet. Aliquam erat volutpat. Mauris maximus maximus mauris vel vestibulum. Vivamus porttitor lorem massa, accumsan varius tortor congue id. Nam molestie tincidunt leo eu maximus. Integer vel odio mattis ante eleifend vestibulum quis aliquet neque. Vestibulum elementum ut nibh eget sodales. Aliquam egestas risus eget purus molestie ornare. Mauris ac nisi eget nibh tempus ultrices. Maecenas luctus lacinia sem, eu ullamcorper magna interdum ultricies.",
-        "prices": [19.5, 25, 30],
-        "webs": [],
+        "price": 19.5,
+        "web": "",
         "category": "Videogames"
+    },
+    {
+        "name": "Movil caro y hipster",
+        "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-pro-family-hero?wid=940&amp;hei=1112&amp;fmt=jpeg&amp;qlt=80&amp;op_usm=0.5,0.5&amp;.v=1604021663000",
+        "description": "Nunc suscipit, mi ut gravida euismod, nulla nisi iaculis massa, vitae congue massa libero sit amet urna. Integer vulputate aliquet imperdiet. Aliquam erat volutpat. Mauris maximus maximus mauris vel vestibulum. Vivamus porttitor lorem massa, accumsan varius tortor congue id. Nam molestie tincidunt leo eu maximus. Integer vel odio mattis ante eleifend vestibulum quis aliquet neque. Vestibulum elementum ut nibh eget sodales. Aliquam egestas risus eget purus molestie ornare. Mauris ac nisi eget nibh tempus ultrices. Maecenas luctus lacinia sem, eu ullamcorper magna interdum ultricies.",
+        "price": 800,
+        "web": "",
+        "category": "Mobile"
     }
 ]
