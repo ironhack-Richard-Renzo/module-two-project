@@ -13,10 +13,7 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.doCreate = (req, res, next) => {
-    Product.create({
-            ...req.body,
-            author: req.currentUser.id,
-        })
+    Product.create({...req.body })
         .then((product) => res.redirect(`/products/${product.id}`))
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {
