@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const httpError = require('http-errors');
 const User = require('../models/user.model');
 const mailer = require('../config/mailer.config');
+const passport = require('passport');
 
 module.exports.register = (req, res, next) => {
   res.render('users/register', { layout:'loginLayout.hbs' });
@@ -42,28 +43,22 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.doLogin = (req, res, next) => {
-  User.findOne({ email: req.body.email, 'verified.date': { $ne: null } })
-    .then((user) => {
-      if (user) {
-        user.checkPassword(req.body.password).then((match) => {
-          if (match) {
-            req.session.currentUserId = user.id;
-
-            res.redirect('/');
-          } else {
-            res.render('users/login', { layout:'loginLayout.hbs', user: req.body, errors: { password: 'invalid password' } });
-          }
-        });
-      } else {
-        res.render('users/login', { layout:'loginLayout.hbs', user: req.body, errors: { email: 'user not found or not verified' } });
-      }
-    })
-    .catch(next);
+  passport.authenticate('local-auth', (error, user, validations) => {
+    if (error) {
+      next(error);
+    } else if (!user) {
+      res.status(400).render('users/login', { user: req.body, errors: validations });
+    } else {
+      req.login(user, error => {
+        if (error) next(error)
+        else res.redirect('/')
+      })
+    }
+  })(req, res, next)
 };
 
 module.exports.logout = (req, res, next) => {
-  req.session.destroy();
-
+  req.logout();
   res.redirect('/login');
 };
 
@@ -80,3 +75,19 @@ module.exports.activate = (req, res, next) => {
     }
   }).catch(next);
 };
+
+module.exports.profile = (req, res, next) => {
+  User.findById(req.user.id)
+  .then(user => res.render('users/profile', {user}))
+  .catch(next)
+}
+
+// module.exports.doProfile = (req, res, next) => {
+//   function renderWithErrors(errors) {
+//     Object.assign(req.user, req.body);
+//     res.status(400).render('users/profile', {
+//       user: req.user,
+//       errors: errors,
+//     });
+//   }
+// }

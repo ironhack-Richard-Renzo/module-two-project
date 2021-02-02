@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const postsController = require('../controllers/posts.controller');
 const commentsController = require('../controllers/comments.controller');
 const usersController = require('../controllers/users.controller');
@@ -21,6 +22,8 @@ router.get('/register', usersController.register);
 router.post('/register', usersController.doRegister);
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
+router.get('/profile', secure.isAuthenticated, usersController.profile)
+// router.post('/profile', secure.isAuthenticated, usersController.doprofile)
 
 // Routes for products
 router.get('/products', secure.isAuthenticated, productsController.list);
