@@ -54,7 +54,7 @@ module.exports.doLogin = (req, res, next) => {
         else res.redirect('/')
       })
     }
-  })(req, res, next)
+  })(req, res, next);
 };
 
 module.exports.logout = (req, res, next) => {
