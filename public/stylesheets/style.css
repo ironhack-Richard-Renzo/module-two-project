@@ -3,6 +3,13 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+button {
+  background-color: #1a1a1a;
+  color: #fafafa;
+  border: solid 2px #1a1a1a;
+  padding: 10px;
+}
 /* Login Page and Register Page */
 .login-content {
   height: 100vh;
@@ -33,10 +40,7 @@ ul {
 }
 
 .login-form button {
-  background-color: #1a1a1a;
-  color: #fafafa;
   font-size: 22px;
-  border: solid 3px;
 }
 
 .login-form input, .login-form button {
@@ -53,9 +57,44 @@ ul {
 .profile header section {
   display: grid;
   grid-template-columns: 20% 80%;
+  margin-bottom: 10px;
+}
+
+.profile header img {
+  border-radius: 50%;
+  border: solid 3px;
+}
+
+.profile header section div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .profile header section div ul {
   display: grid;
   grid-template-columns: repeat(3,1fr);
+  margin-bottom: 20px;
+}
+
+.profile header section div ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.update-profile form {
+  display: flex;
+  flex-direction: column;
+}
+
+.update-profile form label {
+  margin: 20px 0 5px;
+  font-weight: bold;;
+}
+
+.update-profile form input, .update-profile form textarea {
+  padding: 10px;
+  border: none;
+  border-bottom: solid 2px;
 }

@@ -77,21 +77,6 @@ module.exports.profile = (req, res, next) => {
         .then(user => res.render('users/profile', { user }))
         .catch(next)
 }
-
-// module.exports.doProfile = (req, res, next) => {
-//   function renderWithErrors(errors) {
-//     Object.assign(req.user, req.body);
-//     res.status(400).render('users/profile', {
-//       user: req.user,
-//       errors: errors,
-//     });
-//   }
-// }
-
-
-
-
-
 module.exports.addToWhishList = (req, res, next) => {
     User.findOneAndUpdate({ _id: req.user.id }, { $push: { wishlist: req.params.id } }, { new: true }).then(user => {
         if (!user) {
@@ -105,7 +90,7 @@ module.exports.addToWhishList = (req, res, next) => {
 
 module.exports.populateWishList = (req, res, next) => {
 
-    User.findById('6019a0b2030c101a74ad7634').populate('wishlist')
+    User.findById(req.user.id).populate('wishlist')
         .then((user) => {
             if (user) {
                 console.log('el user => ', user);
@@ -114,5 +99,45 @@ module.exports.populateWishList = (req, res, next) => {
                 res.redirect('/products');
             }
         }).catch(next);
+}
+
+module.exports.doProfile = (req, res, next) => {
+
+    function renderWithErrors(errors) {
+        Object.assign(req.user, req.body);
+        res.status(400).render('users/profile', {
+            user: req.user,
+            errors: errors,
+        });
+    }
+
+    const { password, passwordMatch, name, description } = req.body;
+    if (password && password !== passwordMatch) {
+        renderWithErrors({ passwordMatch: 'Password do not match' })
+    } else {
+        const updateFields = { name, description }
+        if (req.file) {
+            updateFields.avatar = req.file.path;
+        }
+        if (password) {
+            updateFields.password = password
+        }
+
+        Object.assign(req.user, updateFields);
+        req.user.save()
+            .then(user => {
+                req.login(user, error => {
+                    if (error) next(error)
+                    else res.redirect('/profile');
+                });
+            }).catch(error => {
+                if (error instanceof mongoose.Error.ValidationError) {
+                    renderWithErrors(error.errors);
+                } else {
+                    next(error);
+                }
+            })
+    }
+
 
 }

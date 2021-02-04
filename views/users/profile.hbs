@@ -3,19 +3,35 @@
         <section>
             <img src="{{ user.avatar }}">
             <div>
-                <h2>{{user.name}}</h2>
                 <ul>
-                    <li>XX Subidos</li>
-                    <li>XX Wishlist</li>
-                    <li>XX IDK</li>
+                    <li><span>XX</span>Publicaciones</li>
+                    <li><span>XX</span>Wishlist</li>
+                    <li><span>XX</span>Followers</li>
                 </ul>
+                <button data-toggle="modal" href="" data-target="#edit-profile">Edit profile</button>
             </div>
         </section>
+        <h2>{{user.name}}</h2>
         <div>
-           Description 
+            <p>{{ user.description }}</p>
         </div>
     </header>
-    <div>
-
+    <div class="update-profile">
+        <form action="/profile" method="post">
+            <label>Username</label>
+            <input type="text" name="name" placeholder="Name" value="{{ user.name }}">
+            <label>Email</label>
+            <input disabled type="text" name="email" value="{{ user.email }}">
+            <label>Description</label>
+            <textarea name="description" placeholder="Description">{{ user.description }}</textarea>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password">
+            <label>Repeat password</label>
+            <input type="password" name="passwordMatch" placeholder="Repeat Password">
+            <button type="submit">Update info</button>
+            {{formError errors.name }}
+            {{formError errors.password }}
+            {{formError errors.passwordMatch }}
+        </form>
     </div>
 </div>
