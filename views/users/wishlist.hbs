@@ -1,31 +1,30 @@
 <section>
   <div class="row">
     <div class="col-12 d-flex justify-content-between align-items-center">
-    <h1>Products list</h1>
-    <a class="btn btn-primary" href="/products/new"><i class="fa fa-plus"></i></a>
+    <h1> {{ currentUser.name  }} Wish list</h1>
     </div>
   </div>
 
   <hr class="mt-0"/>
-
-  {{#if products}}
+    
+  {{#if user}}
     <div class="card-columns">
-      {{#each products as |post| }}
+      {{#each user.wishlist as |product| }}
         <div class="card mb-3">
-          <img class="card-img-top" src="{{ post.image }}" alt="{{ post.name }}">
+          <img class="card-img-top" src="{{ product.image }}" alt="{{ product.name }}">
           <div class="card-body">
             <h5 class="card-name">
-              <a href="/products/{{post.id}}">{{ post.name }}</a>
+              <a href="/products/{{product.id}}">{{ product.name }}</a>
             </h5>
         
-            <p class="card-text">{{#limitChars 100}}{{ post.description }}{{/limitChars}}</p>
+            <p class="card-text">{{#limitChars 100}}{{ product.description }}{{/limitChars}}</p>
           </div>
           <div class="card-footer d-flex justify-content-between">
-            <a class="btn btn-primary" href="/products/{{ post.id }}/edit"><i class="fa fa-edit"></i></a>
-            <form action="/add-to-wishlist/{{post.id}}" method="POST">
+            <a class="btn btn-primary" href="/products/{{ product.id }}/edit"><i class="fa fa-edit"></i></a>
+            <form action="/add-to-wishlist/{{product.id}}" method="product">
               <button type="submit" class="btn btn-danger"><i class="fa fa-heart-o"></i></button>
             </form>
-            <form action="/products/{{post.id}}/delete" method="POST">
+            <form action="/products/{{product.id}}/delete" method="product">
               <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
             </form>
           </div>

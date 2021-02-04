@@ -23,7 +23,10 @@ router.post('/register', usersController.doRegister);
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
 router.get('/profile', secure.isAuthenticated, usersController.profile)
-// router.post('/profile', secure.isAuthenticated, usersController.doprofile)
+    // router.post('/profile', secure.isAuthenticated, usersController.doprofile)
+
+router.post('/add-to-wishlist/:id', secure.isAuthenticated, usersController.addToWhishList);
+router.get('/wishlist', secure.isAuthenticated, usersController.populateWishList);
 
 // Routes for products
 router.get('/products', secure.isAuthenticated, productsController.list);
