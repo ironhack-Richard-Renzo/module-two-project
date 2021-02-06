@@ -42,6 +42,21 @@ module.exports.login = (req, res, next) => {
     res.render('users/login', { layout: 'loginLayout.hbs' });
 };
 
+module.exports.loginWithGoogle = (req, res, next) => {
+    passport.authenticate('google-auth', (error, user, validations) => {
+        if (error) {
+            next(error);
+        } else if (!user) {
+            res.status(400).render('users/login', { user: req.body, errors: validations });
+        } else {
+            req.login(user, error => {
+                if (error) next(error)
+                else res.redirect('/')
+            })
+        }
+    })(req, res, next);
+}
+
 module.exports.doLogin = (req, res, next) => {
     passport.authenticate('local-auth', (error, user, validations) => {
         if (error) {
