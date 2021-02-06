@@ -1,14 +1,14 @@
 ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 button {
-  background-color: #1a1a1a;
-  color: #fafafa;
-  border: solid 2px #1a1a1a;
-  padding: 10px;
+    background-color: #1a1a1a;
+    color: #fafafa;
+    border: solid 2px #1a1a1a;
+    padding: 10px;
 }
 
 a {
@@ -19,93 +19,105 @@ a:hover {
   text-decoration: none;
   color: #ffbdbd;
 }
+
 /* Login Page and Register Page */
+
 .login-content {
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .login-content div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 80px;
 }
 
 .login-background {
-  background-image: url("../loginImg.jpg");
-  background-size: cover;
+    background-image: url("../loginImg.jpg");
+    background-size: cover;
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .login-form input {
-  border: none;
-  border-bottom: solid 3px;
+    border: none;
+    border-bottom: solid 3px;
 }
 
 .login-form button {
-  font-size: 22px;
+    font-size: 22px;
 }
 
-.login-form input, .login-form button {
-  padding: 20px;
-  margin: 20px 0;
+.login-form input,
+.login-form button {
+    padding: 20px;
+    margin: 20px 0;
 }
 
 .login-content span.invalid {
-  padding: 10px 20px;
-  background-color: #ffbdbd;
+    padding: 10px 20px;
+    background-color: #ffbdbd;
+}
+
+/* Navbar */
+nav img {
+  max-width: 30px;
+  border-radius: 50%;
 }
 
 /* Profile Page */
+
 .profile header section {
-  display: grid;
-  grid-template-columns: 20% 80%;
-  margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    margin-bottom: 10px;
 }
 
 .profile header img {
-  border-radius: 50%;
-  border: solid 3px;
+    border-radius: 50%;
+    border: solid 3px;
 }
 
 .profile header section div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .profile header section div ul {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 20px;
 }
 
 .profile header section div ul li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .update-profile form {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .update-profile form label {
-  margin: 20px 0 5px;
-  font-weight: bold;;
+    margin: 20px 0 5px;
+    font-weight: bold;
+    ;
 }
 
-.update-profile form input, .update-profile form textarea {
-  padding: 10px;
-  border: none;
-  border-bottom: solid 2px;
+.update-profile form input,
+.update-profile form textarea {
+    padding: 10px;
+    border: none;
+    border-bottom: solid 2px;
 }
 
 /* Product Listing Page */
@@ -162,4 +174,12 @@ p.product-cat {
 .product p.price {
   font-size: 14px;
   color: #888888;
+}
+/* Set the size of the div element that contains the map */
+
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
 }

@@ -38,6 +38,8 @@ const userSchema = new Schema({
                 Math.random().toString(36).substr(2),
         },
     },
+    latitude: Number,
+    longitude: Number,
     avatar: {
         type: String,
         default: function() {
