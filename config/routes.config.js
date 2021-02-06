@@ -6,6 +6,9 @@ const commentsController = require('../controllers/comments.controller');
 const usersController = require('../controllers/users.controller');
 const secure = require('../middlewares/secure.middleware');
 const productsController = require('../controllers/products.controller')
+const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
+
+
 
 router.get('/posts', secure.isAuthenticated, postsController.list);
 router.get('/posts/new', secure.isAuthenticated, postsController.create);
@@ -22,12 +25,15 @@ router.get('/register', usersController.register);
 router.post('/register', usersController.doRegister);
 router.get('/login', usersController.login);
 router.post('/login', usersController.doLogin);
+router.get('/authenticate/google', passport.authenticate('google-auth', { scope: GOOGLE_SCOPES }));
+router.get('/authenticate/google/cb', usersController.loginWithGoogle);
 router.get('/profile', secure.isAuthenticated, usersController.profile);
 
 router.post('/add-to-wishlist/:id', secure.isAuthenticated, usersController.addToWhishList);
 // router.get('/wishlist', secure.isAuthenticated, usersController.populateWishList);
 router.get('/profile', secure.isAuthenticated, usersController.profile);
 router.post('/profile', secure.isAuthenticated, usersController.doProfile);
+//router.post('/profile', secure.isAuthenticated, usersController.doProfile);
 
 // Routes for products
 router.get('/products', secure.isAuthenticated, productsController.list);
