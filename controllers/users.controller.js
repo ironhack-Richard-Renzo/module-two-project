@@ -119,5 +119,4 @@ module.exports.doProfile = (req, res, next) => {
         }
       })
   }
-
 }
