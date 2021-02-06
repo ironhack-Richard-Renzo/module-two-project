@@ -24,17 +24,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  // la variable path se podrá usar desde cualquier vista de hbs (/register, /posts)
-  res.locals.path = req.path;
-  res.locals.currentUser = req.user;
+    // la variable path se podrá usar desde cualquier vista de hbs (/register, /posts)
+    res.locals.path = req.path;
+    res.locals.currentUser = req.user;
+    res.locals.GOOGLE_MAPS = process.env.GEOCODER_API_KEY
+        // const flashData = req.flash('data')
+        //   .reduce((data, message) => {
+        //     return {...data, ...JSON.parse(message)}
+        //   }, {});
+        // Object.assign(res.locals, flashData);
 
-  // const flashData = req.flash('data')
-  //   .reduce((data, message) => {
-  //     return {...data, ...JSON.parse(message)}
-  //   }, {});
-  // Object.assign(res.locals, flashData);
-
-  next();
+    next();
 });
 
 /**
@@ -50,20 +50,20 @@ const router = require('./config/routes.config');
 app.use('/', router);
 
 app.use((req, res, next) => {
-  next(createError(404, 'Page not found'));
+    next(createError(404, 'Page not found'));
 });
 
 app.use((error, req, res, next) => {
-  console.error(error);
-  let status = error.status || 500;
+    console.error(error);
+    let status = error.status || 500;
 
-  res.status(status).render('error', {
-    message: error.message,
-    error: req.app.get('env') === 'development' ? error : {},
-  });
+    res.status(status).render('error', {
+        message: error.message,
+        error: req.app.get('env') === 'development' ? error : {},
+    });
 });
 
 const port = Number(process.env.PORT || 3000);
 app.listen(port, () => {
-  console.log(`Ready! Listening on port ${port}`);
+    console.log(`Ready! Listening on port ${port}`);
 });
