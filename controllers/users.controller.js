@@ -88,10 +88,11 @@ module.exports.activate = (req, res, next) => {
 };
 
 module.exports.profile = (req, res, next) => {
-    User.findById(req.user.id)
+    User.findById(req.user.id).populate('wishlist')
         .then(user => res.render('users/profile', { user }))
         .catch(next)
 }
+
 module.exports.addToWhishList = (req, res, next) => {
     User.findOneAndUpdate({ _id: req.user.id }, { $push: { wishlist: req.params.id } }, { new: true }).then(user => {
         if (!user) {
@@ -103,18 +104,18 @@ module.exports.addToWhishList = (req, res, next) => {
     }).catch(next);
 }
 
-module.exports.populateWishList = (req, res, next) => {
+// module.exports.populateWishList = (req, res, next) => {
 
-    User.findById(req.user.id).populate('wishlist')
-        .then((user) => {
-            if (user) {
-                console.log('el user => ', user);
-                res.render('users/wishlist', { user });
-            } else {
-                res.redirect('/products');
-            }
-        }).catch(next);
-}
+//     User.findById(req.user.id).populate('wishlist')
+//         .then((user) => {
+//             if (user) {
+//                 console.log('el user => ', user);
+//                 res.render('users/wishlist', { user });
+//             } else {
+//                 res.redirect('/products');
+//             }
+//         }).catch(next);
+// }
 
 module.exports.doProfile = (req, res, next) => {
 

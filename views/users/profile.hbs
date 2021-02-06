@@ -40,4 +40,24 @@
             {{formError errors.passwordMatch }}
         </form>
     </div>
+    <hr>
+    {{#if user}}
+        <div class="product-grid">
+        {{#each user.wishlist as |product|}}
+            <div class="product">
+            <a href="/products/{{product.id}}">
+                <img class="product-img" src="{{ product.image }}" alt="{{ product.name }}">
+                <div class="product-info">
+                <p class="product-cat">{{ product.category }}</p>
+                <h2>{{ product.name }}</h2>
+                <p class="price">{{ product.price }} €</p>
+                </div>
+            </a>
+            <form class="add-to-wishlist" action="/add-to-wishlist/{{product.id}}" method="POST">
+                <button type="submit" class="btn btn-danger"><i class="fa fa-heart-o"></i></button>
+            </form>
+            </div>
+        {{/each}}
+        </div>
+    {{/if}}
 </div>

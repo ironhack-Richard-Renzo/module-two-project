@@ -11,6 +11,14 @@ button {
     padding: 10px;
 }
 
+a {
+  color: #1a1a1a;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #ffbdbd;
+}
 
 /* Login Page and Register Page */
 
@@ -57,6 +65,11 @@ button {
     background-color: #ffbdbd;
 }
 
+/* Navbar */
+nav img {
+  max-width: 30px;
+  border-radius: 50%;
+}
 
 /* Profile Page */
 
@@ -107,7 +120,61 @@ button {
     border-bottom: solid 2px;
 }
 
+/* Product Listing Page */
+.product-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.product-content {
+  display: flex;
+}
+
+.filters {
+  padding-right: 25px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.product {
+  position: relative;
+}
+
+.product form.add-to-wishlist {
+  position: absolute;
+  top: 0;
+}
+
+.product-img {
+  width: 100%;
+  border-bottom: solid 2px;
+}
+
+.product:hover .product-img {
+  border-bottom: solid 2px #ffbdbd;
+}
+
+p.product-cat {
+  font-size: 14px;
+  margin: 5px 0 2px;
+  color: #888888;
+}
+
+.product-info h2 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+.product p.price {
+  font-size: 14px;
+  color: #888888;
+}
 /* Set the size of the div element that contains the map */
 
 #map {
