@@ -28,6 +28,12 @@
             <input type="password" name="password" placeholder="Password">
             <label>Repeat password</label>
             <input type="password" name="passwordMatch" placeholder="Repeat Password">
+            <label >Location: add your location to find sales near you!</label>
+            <input id="places-input" placeholder="Set your address" type="text" autocomplete="on" />
+            <!--The div element for the map -->
+            <div id="map"></div>
+            <input type="hidden" name="latitude" value="{{ currentUser.latitude }}" />
+            <input type="hidden" name="longitude" value="{{ currentUser.longitude }}" />
             <button type="submit">Update info</button>
             {{formError errors.name }}
             {{formError errors.password }}
