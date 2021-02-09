@@ -127,11 +127,13 @@ module.exports.doProfile = (req, res, next) => {
         });
     }
 
-    const { password, passwordMatch, name, description } = req.body;
+    console.log('body LONG BEFORE => ', req.body);
+
+    const { password, passwordMatch, name, description, latitude, longitude } = req.body;
     if (password && password !== passwordMatch) {
         renderWithErrors({ passwordMatch: 'Password do not match' })
     } else {
-        const updateFields = { name, description }
+        const updateFields = { name, description, latitude, longitude }
         if (req.file) {
             updateFields.avatar = req.file.path;
         }

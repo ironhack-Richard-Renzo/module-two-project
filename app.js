@@ -27,12 +27,7 @@ app.use((req, res, next) => {
     // la variable path se podrá usar desde cualquier vista de hbs (/register, /posts)
     res.locals.path = req.path;
     res.locals.currentUser = req.user;
-    res.locals.GOOGLE_MAPS = process.env.GEOCODER_API_KEY
-        // const flashData = req.flash('data')
-        //   .reduce((data, message) => {
-        //     return {...data, ...JSON.parse(message)}
-        //   }, {});
-        // Object.assign(res.locals, flashData);
+    res.locals.GOOGLE_MAPS = process.env.GEOCODER_API_KEY;
 
     next();
 });
