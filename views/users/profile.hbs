@@ -8,7 +8,7 @@
                     <li><span>XX</span>Wishlist</li>
                     <li><span>XX</span>Followers</li>
                 </ul>
-                <button data-toggle="modal" href="" data-target="#edit-profile">Edit profile</button>
+                <a class="button" href="#updateprofile">Edit profile</a>
             </div>
         </section>
         <h2>{{user.name}}</h2>
@@ -16,8 +16,11 @@
             <p>{{ user.description }}</p>
         </div>
     </header>
-    <div class="update-profile">
-        <form action="/profile" method="post">
+    <div id="updateprofile" class="update-profile">
+        <form action="/profile" method="post" enctype="multipart/form-data">
+        <a href="#">x</a>
+            <label for="avatar-input">Change avatar</label>
+            <input type="file" id="avatar-input" name="avatar">
             <label>Username</label>
             <input type="text" name="name" placeholder="Name" value="{{ user.name }}">
             <label>Email</label>
