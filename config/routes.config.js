@@ -7,8 +7,7 @@ const usersController = require('../controllers/users.controller');
 const secure = require('../middlewares/secure.middleware');
 const productsController = require('../controllers/products.controller')
 const GOOGLE_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
-
-
+const storage = require('../config/storage.config')
 
 router.get('/posts', secure.isAuthenticated, postsController.list);
 router.get('/posts/new', secure.isAuthenticated, postsController.create);
@@ -32,10 +31,10 @@ router.get('/profile', secure.isAuthenticated, usersController.profile);
 router.post('/add-to-wishlist/:id', secure.isAuthenticated, usersController.addToWhishList);
 // router.get('/wishlist', secure.isAuthenticated, usersController.populateWishList);
 router.get('/profile', secure.isAuthenticated, usersController.profile);
-router.post('/profile', secure.isAuthenticated, usersController.doProfile);
+router.post('/profile', secure.isAuthenticated, storage.single('avatar'), usersController.doProfile);
 //router.post('/profile', secure.isAuthenticated, usersController.doProfile);
 
-// Routes for products
+// Routes for productsnpm
 router.get('/products', secure.isAuthenticated, productsController.list);
 router.get('/products/new', secure.isAuthenticated, productsController.create);
 router.post('/products', secure.isAuthenticated, productsController.doCreate);
