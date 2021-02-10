@@ -35,8 +35,8 @@
             <input id="places-input" placeholder="Set your address" type="text" autocomplete="on" />
             <!--The div element for the map -->
             <div id="map"></div>
-            <input type="hidden" name="latitude" value="{{ currentUser.latitude }}" />
-            <input type="hidden" name="longitude" value="{{ currentUser.longitude }}" />
+            <input id="lat-input" type="hidden" name="latitude" />
+            <input id="lng-input" type="hidden" name="longitude" />
             <button type="submit">Update info</button>
             {{formError errors.name }}
             {{formError errors.password }}

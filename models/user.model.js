@@ -41,8 +41,8 @@ const userSchema = new Schema({
                 Math.random().toString(36).substr(2),
         },
     },
-    latitude: Number,
-    longitude: Number,
+    latitude: String,
+    longitude: String,
     avatar: {
         type: String,
         default: function() {
