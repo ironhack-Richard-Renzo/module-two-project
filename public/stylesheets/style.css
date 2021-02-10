@@ -4,11 +4,12 @@ ul {
     margin: 0;
 }
 
-button {
+button, .button {
     background-color: #1a1a1a;
     color: #fafafa;
     border: solid 2px #1a1a1a;
     padding: 10px;
+    text-align: center;
 }
 
 a {
@@ -72,16 +73,18 @@ nav img {
 }
 
 /* Profile Page */
-
 .profile header section {
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 15% 80%;
+    grid-gap: 5%;
     margin-bottom: 10px;
 }
 
 .profile header img {
     border-radius: 50%;
     border: solid 3px;
+    max-width: 100%;
+    height: auto;
 }
 
 .profile header section div {
@@ -102,7 +105,29 @@ nav img {
     align-items: center;
 }
 
+#updateprofile:target {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 999;
+}
+
+.update-profile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events:none;
+  transition: all 1s;
+}
+
 .update-profile form {
+    background-color: #fafafa;
+    width: 800px;
+    padding: 40px;
+    margin: 30px auto;
+    position: relative;
     display: flex;
     flex-direction: column;
 }
