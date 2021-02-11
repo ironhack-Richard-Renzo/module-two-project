@@ -133,12 +133,22 @@ module.exports.doProfile = (req, res, next) => {
     if (password && password !== passwordMatch) {
         renderWithErrors({ passwordMatch: 'Password do not match' })
     } else {
-        const updateFields = { name, description, latitude, longitude }
+        const updateFields = { name, description }
         if (req.file) {
             updateFields.avatar = req.file.path;
         }
         if (password) {
             updateFields.password = password
+        }
+
+        if (latitude && longitude) {
+
+            updateFields.location = {
+                type: "Point",
+                coordinates: [Number(longitude), Number(latitude)]
+            };
+        } else {
+            updateFields.location = undefined;
         }
 
         Object.assign(req.user, updateFields);

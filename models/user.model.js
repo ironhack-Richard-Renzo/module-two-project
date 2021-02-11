@@ -41,8 +41,15 @@ const userSchema = new Schema({
                 Math.random().toString(36).substr(2),
         },
     },
-    latitude: String,
-    longitude: String,
+    location: {
+        type: {
+            type: String, // Don't do `{ location: { type: String } }`
+            enum: ['Point'], // 'location.type' must be 'Point'            
+        },
+        coordinates: {
+            type: [Number]
+        }
+    },
     avatar: {
         type: String,
         default: function() {
@@ -84,6 +91,8 @@ userSchema.pre('save', function(next) {
 userSchema.methods.checkPassword = function(passwordToCheck) {
     return bcrypt.compare(passwordToCheck, this.password);
 };
+
+userSchema.index({ location: '2dsphere' });
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
