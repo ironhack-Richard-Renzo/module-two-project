@@ -186,6 +186,13 @@ nav img {
 
 .filters {
   padding-right: 25px;
+  position: sticky;
+  top: 30px;
+  align-self: flex-start;
+}
+
+.filters form label.title {
+  font-weight: bold;
 }
 
 .product-grid {

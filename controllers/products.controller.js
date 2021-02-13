@@ -3,7 +3,13 @@ const mongoose = require('mongoose');
 const Product = require('../models/product.model');
 
 module.exports.list = (req, res, next) => {
-    Product.find()
+    
+    const { category, name } = req.query
+    const filter = {}
+    if (category) filter.category = category;
+    if (name) filter.name = new RegExp(name, "i"); 
+
+    Product.find(filter)
         .then((products) => res.render('products/list', { products }))
         .catch(next);
 };
