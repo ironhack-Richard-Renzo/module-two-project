@@ -34,7 +34,7 @@ module.exports.doCreate = (req, res, next) => {
         req.body.location = undefined;
     }
 
-    bidData.author = req.user.id;
+    bidData.author = req.user.name;
     bidData.product = req.body.product;
 
     Bid.create(bidData)
