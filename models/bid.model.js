@@ -18,7 +18,7 @@ const schema = new Schema({
         default: null
     },
     author: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'User',
         default: null
     },
