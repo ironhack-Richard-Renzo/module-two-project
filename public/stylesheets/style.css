@@ -163,9 +163,21 @@ nav img {
 
 /* Product Listing Page */
 .product-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.product-title h1 {
+  font-size: 60px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+.product-title p {
+  color: #888888;
+  text-transform: uppercase;
+  font-weight: 300;
 }
 
 .product-content {
@@ -216,6 +228,19 @@ p.product-cat {
   font-size: 14px;
   color: #888888;
 }
+
+/* Product Detail Page */
+.product-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+}
+
+.product-detail img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Set the size of the div element that contains the map */
 
 #map {
