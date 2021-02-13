@@ -1,21 +1,18 @@
-<section class="mb-3">
-  <h1>Product detail</h1>
-  
-  <hr class="mt-0" />
-
-  <div class="card">
-    <img class="card-img-top" src="{{product.image}}" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5>
-      <p class="card-text">{{product.description}}</p>
-
-      <div class="d-flex">
-        <a class="btn btn-primary mr-3" href="/products/{{product.id}}/edit"><i class="fa fa-cog mr-2"></i>Edit</a>
+<section class="product-detail">
+  <div>
+    <img src="{{product.image}}">
+  </div>
+  <div>
+    <h1>{{product.name}}</h1>
+    <span>{{product.price}}</span>
+    <p>{{product.description}}</p>
+    <form class="add-to-wishlist" action="/add-to-wishlist/{{product.id}}" method="POST">
+        <button type="submit" class="btn btn-danger"><i class="fa fa-heart-o"></i></button>
+    </form>
+    <a class="btn btn-primary mr-3" href="/products/{{product.id}}/edit"><i class="fa fa-cog mr-2"></i>Edit</a>
         
         <form action="/products/{{product.id}}/delete" method="POST">
           <button type="submit" class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Delete</button>
         </form>
-      </div>
-    </div>
   </div>
 </section>
