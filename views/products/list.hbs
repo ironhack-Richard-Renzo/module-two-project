@@ -6,8 +6,25 @@
 
 <section class="product-content">
   <div class="filters">
-    <form>
-      <input type="search">
+    <form method="GET" action="/products">
+      <label class="title">Search</label>
+      <input type="text" name="name" placeholder="Product name">
+      <hr>
+      <label class="title">Categories</label><br>
+      <input type="checkbox" id="cat1" name="category" value="Clothes">
+      <label for="cat1">Clothes</label><br>
+      <input type="checkbox" id="cat2" name="category" value="Mobile">
+      <label for="cat2">Mobile</label><br>
+      <input type="checkbox" id="cat2" name="category" value="Home">
+      <label for="cat2">Home</label><br>
+      <input type="checkbox" id="cat2" name="category" value="Tools">
+      <label for="cat2">Tools</label><br>
+      <input type="checkbox" id="cat2" name="category" value="Videogame">
+      <label for="cat2">Videogames</label><br>
+      <input type="checkbox" id="cat2" name="category" value="Other">
+      <label for="cat2">Other</label><br>
+      
+      <button type="submit">Submit</button>
     </form>
   </div>
   {{#if products}}
