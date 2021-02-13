@@ -72,12 +72,28 @@ nav img {
   border-radius: 50%;
 }
 
+/* Footer */
+.footer {
+  margin-top: 40px;
+  padding: 60px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer ul {
+  display: flex;
+  justify-content: center;
+}
+
+.footer ul li {
+  margin: 0px 5px 10px 5px ;
+}
 /* Profile Page */
 .profile header section {
     display: grid;
     grid-template-columns: 15% 80%;
     grid-gap: 5%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .profile header img {
