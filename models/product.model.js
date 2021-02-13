@@ -6,6 +6,7 @@ const productSchema = new Schema({
         type: String,
         required: 'Product name is mandatory',
         trim: true,
+        unique: true
     },
     description: String,
     image: {
@@ -28,15 +29,7 @@ const productSchema = new Schema({
     brand: {
         type: String,
         default: null
-    },
-    latitude: {
-        type: Number,
-        default: null
-    },
-    longitud: {
-        type: Number,
-        default: null
-    },
+    }
 });
 
 productSchema.pre('save', function(next) {

@@ -5,14 +5,16 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item {{active path '/products'}}"><a class="nav-link" href="/products">Products</a></li>
+        <li class="nav-item {{active path '/bids'}}"><a class="nav-link" href="/bids">Bid list!</a></li>
         <li class="nav-item {{active path '/new'}}"><a class="nav-link" href="/products/new">Add product</a></li>
       </ul>
 
       <ul class="navbar-nav my-2 my-lg-0">
         {{#if currentUser}}
           <li class="nav-item">
+            <button class="btn btn-warning btn-sm" {{active path '/bids/new'}} ><a href="/bids/new">New dib!</a></button>
             <form action="/logout" method="POST">
-              <a href="/profile"><span class="mr-3 text-muted"><img src="{{currentUser.avatar}}"></a>
+              <a href="/profile"><span class="mr-3 text-muted"><img src="{{currentUser.avatar}}"></a>              
               <button type="submit" class="btn btn-danger btn-sm" href="/logout">Logout</button>
             </form>
           </li>

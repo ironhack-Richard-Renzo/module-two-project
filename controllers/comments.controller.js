@@ -1,3 +1,4 @@
+/*
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const Post = require('../models/post.model');
@@ -35,3 +36,4 @@ module.exports.create = (req, res, next) => {
       }
     });
 }
+*/

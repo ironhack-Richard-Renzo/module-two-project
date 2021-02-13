@@ -31,13 +31,14 @@ const schema = new Schema({
         type: String,
         default: null
     },
-    latitude: {
-        type: String,
-        default: null
-    },
-    longitud: {
-        type: String,
-        default: null
+    location: {
+        type: {
+            type: String, // Don't do `{ location: { type: String } }`
+            enum: ['Point'], // 'location.type' must be 'Point'            
+        },
+        coordinates: {
+            type: [Number]
+        }
     },
     expireDate: {
         type: Date,
@@ -48,6 +49,8 @@ const schema = new Schema({
         default: null
     }
 });
+
+schema.index({ location: '2dsphere' });
 
 const Bid = mongoose.model('Bid', schema);
 
