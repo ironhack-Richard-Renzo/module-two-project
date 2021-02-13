@@ -1,6 +1,7 @@
 const createError = require('http-errors');
 const mongoose = require('mongoose');
 const Bid = require('../models/bid.model');
+const Product = require('../models/product.model');
 
 module.exports.list = (req, res, next) => {
     Bid.find()
@@ -9,14 +10,34 @@ module.exports.list = (req, res, next) => {
 };
 
 module.exports.create = (req, res, next) => {
-    res.render('bids/new');
+    Product.find()
+        .then((products) => res.render('bids/new', { products }))
+        .catch(next);
 };
 
 module.exports.doCreate = (req, res, next) => {
-    Bid.create({
-            ...req.body,
-            author: req.currentUser.id,
-        })
+    bidData = {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        web: req.body.web
+    }
+
+    if (req.file) bidData.image = req.file.path;
+
+    if (req.body.latitude && req.body.longitude) {
+        req.body.location = {
+            type: "Point",
+            coordinates: [Number(req.body.longitude), Number(req.body.latitude)]
+        };
+    } else {
+        req.body.location = undefined;
+    }
+
+    bidData.author = req.user.id;
+    bidData.product = req.body.product;
+
+    Bid.create(bidData)
         .then((bid) => res.redirect(`/bids/${bid.id}`))
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {

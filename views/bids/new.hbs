@@ -1,27 +1,39 @@
 <section>
-  <h1>New post</h1>
+  <h1>New bid</h1>
 
   <hr class="mt-0" />
 
-  <form action="/posts" method="POST">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input name="title" type="text" class="form-control {{isInvalid errors.title}}" id="title" placeholder="Enter title" value="{{ post.title }}">
-      {{formError errors.title}}
-    </div>
-
-    <div class="form-group">
-      <label for="image">Image</label>
-      <input name="image" type="text" class="form-control {{isInvalid errors.image}}" id="image" placeholder="Enter image" value="{{ post.image }}">
-      {{formError errors.image}}
-    </div>
-
-    <div class="form-group">
-      <label for="text">Text</label>
-      <textarea name="text" type="text" class="form-control {{isInvalid errors.text}}" id="text" placeholder="Enter post text" rows="10">{{ post.text }}</textarea>
-      {{formError errors.text}}
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create Post</button>
-  </form>
+  <div class="add-bid">
+      <form action="/bids" method="POST" enctype="multipart/form-data">
+        <label for="title">Title</label>
+        <input name="title" type="text" id="title" placeholder="Enter title" value="{{ bid.title }}">
+        <label for="image">Image</label>
+        <input name="image" type="file" id="bid" placeholder="Enter image">
+        <label for="description">Description</label>
+        <textarea name="description" type="text" id="description" placeholder="Enter bid description" rows="10">{{ bid.description }}</textarea>
+        <label for="price">Price</label>
+        <input name="price" type="text" id="price" placeholder="Enter title" value="{{ bid.price }}">
+        <label for="web">Web</label>
+        <input name="web" type="text" id="web" placeholder="" value="{{ bid.web }}">
+        <label for="product">Product</label>
+        {{#if products}}
+        <select name="product" id="product">
+          {{#each products as |product|}}
+            <option value="{{product.id}}">{{product.name}}</option>
+          {{/each}}
+        </select>
+        {{/if}}
+        <input id="places-input" placeholder="Set the Bid location" type="text" autocomplete="on" />
+        <!--The div element for the map -->
+        <div id="map"></div>
+        <input id="lat-input" type="hidden" name="latitude" />
+        <input id="lng-input" type="hidden" name="longitude" />
+        <label for="expireDate">Expire date</label>
+        <input name="expireDate" id="expireDate" type="date" value="{{ bid.expireDate }}" />
+        <div>
+          <input name="active" id="active" type="checkbox" value="{{ bid.active }}" /> <label for="active">Active</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Bid</button>
+      </form>
+  </div>
 </section>

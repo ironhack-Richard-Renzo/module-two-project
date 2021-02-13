@@ -4,7 +4,8 @@ ul {
     margin: 0;
 }
 
-button, .button {
+button,
+.button {
     background-color: #1a1a1a;
     color: #fafafa;
     border: solid 2px #1a1a1a;
@@ -13,13 +14,14 @@ button, .button {
 }
 
 a {
-  color: #1a1a1a;
+    color: #1a1a1a;
 }
 
 a:hover {
-  text-decoration: none;
-  color: #ffbdbd;
+    text-decoration: none;
+    color: #ffbdbd;
 }
+
 
 /* Login Page and Register Page */
 
@@ -66,13 +68,17 @@ a:hover {
     background-color: #ffbdbd;
 }
 
+
 /* Navbar */
+
 nav img {
-  max-width: 30px;
-  border-radius: 50%;
+    max-width: 30px;
+    border-radius: 50%;
 }
 
+
 /* Profile Page */
+
 .profile header section {
     display: grid;
     grid-template-columns: 15% 80%;
@@ -106,20 +112,20 @@ nav img {
 }
 
 #updateprofile:target {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 999;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 999;
 }
 
 .update-profile {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events:none;
-  transition: all 1s;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1s;
 }
 
 .update-profile form {
@@ -145,61 +151,91 @@ nav img {
     border-bottom: solid 2px;
 }
 
+
+/*Bid style*/
+
+.add-bid form {
+    background-color: #fafafa;
+    width: 800px;
+    padding: 40px;
+    margin: 30px auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-bid form label {
+    margin: 20px 0 5px;
+    font-weight: bold;
+    ;
+}
+
+.add-bid form input,
+.add-bid form textarea {
+    padding: 10px;
+    border: none;
+    border-bottom: solid 2px;
+}
+
+
 /* Product Listing Page */
+
 .product-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .product-content {
-  display: flex;
+    display: flex;
 }
 
 .filters {
-  padding-right: 25px;
+    padding-right: 25px;
 }
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
 }
 
 .product {
-  position: relative;
+    position: relative;
 }
 
 .product form.add-to-wishlist {
-  position: absolute;
-  top: 0;
+    position: absolute;
+    top: 0;
 }
 
 .product-img {
-  width: 100%;
-  border-bottom: solid 2px;
+    width: 100%;
+    border-bottom: solid 2px;
 }
 
 .product:hover .product-img {
-  border-bottom: solid 2px #ffbdbd;
+    border-bottom: solid 2px #ffbdbd;
 }
 
 p.product-cat {
-  font-size: 14px;
-  margin: 5px 0 2px;
-  color: #888888;
+    font-size: 14px;
+    margin: 5px 0 2px;
+    color: #888888;
 }
 
 .product-info h2 {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
 }
 
 .product p.price {
-  font-size: 14px;
-  color: #888888;
+    font-size: 14px;
+    color: #888888;
 }
+
+
 /* Set the size of the div element that contains the map */
 
 #map {
