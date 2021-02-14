@@ -5,7 +5,7 @@
             <div>
                 <ul>
                     <li><span>XX</span>Publicaciones</li>
-                    <li><span>XX</span>Wishlist</li>
+                    <li><span>{{ user.wishlist.length }}</span>Wishlist</li>
                     <li><span>XX</span>Followers</li>
                 </ul>
                 <a class="button" href="#updateprofile">Edit profile</a>
@@ -56,8 +56,8 @@
                 <p class="price">{{ product.price }} €</p>
                 </div>
             </a>
-            <form class="add-to-wishlist" action="/add-to-wishlist/{{product.id}}" method="POST">
-                <button type="submit" class="btn btn-danger"><i class="fa fa-heart-o"></i></button>
+            <form class="add-to-wishlist" action="/remove-from-wishlist/{{product.id}}" method="POST">
+                <button type="submit" class="btn btn-dark"><i class="fa fa-trash"></i></button>
             </form>
             </div>
         {{/each}}

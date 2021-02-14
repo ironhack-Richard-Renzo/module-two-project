@@ -30,6 +30,7 @@ router.get('/authenticate/google', passport.authenticate('google-auth', { scope:
 router.get('/authenticate/google/cb', usersController.loginWithGoogle);
 router.get('/profile', secure.isAuthenticated, usersController.profile);
 router.post('/add-to-wishlist/:id', secure.isAuthenticated, usersController.addToWhishList);
+router.post('/remove-from-wishlist/:id', secure.isAuthenticated, usersController.removeFromWhishList);
 router.get('/profile', secure.isAuthenticated, usersController.profile);
 router.post('/profile', secure.isAuthenticated, storage.single('avatar'), usersController.doProfile);
 //router.post('/profile', secure.isAuthenticated, usersController.doProfile);
