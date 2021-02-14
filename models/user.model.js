@@ -58,8 +58,9 @@ const userSchema = new Schema({
     },
     wishlist: {
         type: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Product'
+            type: String,
+            ref: 'Product',
+            unique: true
         }]
     }
 }, {

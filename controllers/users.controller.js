@@ -94,28 +94,29 @@ module.exports.profile = (req, res, next) => {
 }
 
 module.exports.addToWhishList = (req, res, next) => {
-    User.findOneAndUpdate({ _id: req.user.id }, { $push: { wishlist: req.params.id } }, { new: true }).then(user => {
-        if (!user) {
-            next(httpError(404, 'Invalid user'))
-        } else {
-            console.log('user after add pop => ', user);
-            res.redirect('/products');
-        }
-    }).catch(next);
+
+    const objectIdStr = req.params.id.toString();
+
+    User.findOne({ _id: req.user.id })
+        .then(user => {
+
+            let repeated = false;
+            user.wishlist.map(index => { if (index === objectIdStr) repeated = true });
+
+            if (!repeated) {
+                User.updateOne({ _id: user.id }, { $push: { wishlist: req.params.id } }, { new: true }).then(user => {
+                    if (!user) {
+                        next(httpError(404, 'Invalid user'))
+                    } else {
+                        res.redirect('/products');
+                    }
+                }).catch(next);
+
+            } else {
+                res.redirect('/products');
+            }
+        }).catch(next);
 }
-
-// module.exports.populateWishList = (req, res, next) => {
-
-//     User.findById(req.user.id).populate('wishlist')
-//         .then((user) => {
-//             if (user) {
-//                 console.log('el user => ', user);
-//                 res.render('users/wishlist', { user });
-//             } else {
-//                 res.redirect('/products');
-//             }
-//         }).catch(next);
-// }
 
 module.exports.doProfile = (req, res, next) => {
 
@@ -126,8 +127,6 @@ module.exports.doProfile = (req, res, next) => {
             errors: errors,
         });
     }
-
-    console.log('body LONG BEFORE => ', req.body);
 
     const { password, passwordMatch, name, description, latitude, longitude } = req.body;
     if (password && password !== passwordMatch) {
@@ -166,6 +165,4 @@ module.exports.doProfile = (req, res, next) => {
                 }
             })
     }
-
-
 }
