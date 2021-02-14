@@ -118,6 +118,27 @@ module.exports.addToWhishList = (req, res, next) => {
         }).catch(next);
 }
 
+module.exports.removeFromWhishList = (req, res, next) => {
+
+    const objectIdStr = req.params.id.toString();
+
+    User.findOne({ _id: req.user.id })
+        .then(user => {
+
+            const index = user.wishlist.indexOf(objectIdStr);
+            user.wishlist.splice(index, 1);
+
+            User.updateOne({ _id: user.id }, { wishlist: user.wishlist }, { new: true }).then(user => {
+                if (!user) {
+                    next(httpError(404, 'Invalid user'))
+                } else {
+                    res.redirect('/profile');
+                }
+            }).catch(next);
+
+        }).catch(next);
+}
+
 module.exports.doProfile = (req, res, next) => {
 
     function renderWithErrors(errors) {
