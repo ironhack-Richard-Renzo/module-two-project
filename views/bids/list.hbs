@@ -1,36 +1,29 @@
+<section class="product-title">
+  {{!-- TO DO: Cambiar el nombre del titulo cuando se filtra por categoria --}}
+  <h1>Bid listing</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+</section>
+
 <section>
-  <div class="row">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-    <h1>Bid list</h1>
-    <a class="btn btn-primary" href="/bids/new"><i class="fa fa-plus"></i></a>
-    </div>
-  </div>
-
-  <hr class="mt-0"/>
-
   {{#if bids}}
-    <div class="card-columns">
+    <div class="bid-grid">
       {{#each bids as |bid| }}
-        <div class="card mb-3">
-          <img class="card-img-top" src="{{ bid.image }}" alt="{{ bid.title }}">
-          <div class="card-body">
-            <h5 class="card-title">
-              <a href="/bids/{{bid.id}}">{{ bid.title }}</a>
-            </h5>
-            <h6 class="card-title">
-              Author: {{bid.author}}
-            </h6>
-            <p class="card-text">{{#limitChars 100}}{{ bid.description }}{{/limitChars}}</p>
+        <div class="bid">
+          <div class="bid-header">
+            <h2>{{ bid.title }}</h2>
+            <small>From: {{ bid.author }}</small>
           </div>
-          <div class="card-footer d-flex justify-content-between">
-            <a class="btn btn-primary" href="/bids/{{ bid.id }}/edit"><i class="fa fa-edit"></i></a>
-            <form action="/bids/{{bid.id}}/delete" method="POST">
-              <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
-            </form>
+          <img class="card-img-top" src="{{ bid.image }}" alt="{{ bid.title }}">
+          <div class="bid-info">
+            <p class="bid-desc">{{#limitChars 100}}{{ bid.description }}{{/limitChars}}</p>
+            <small>XXkm of you</small>
+          </div>
+          <div class="rip"></div>
+          <div class="bid-footer">
+            <a href="/bids/{{bid.id}}">Take the bid</a>
           </div>
         </div>
       {{/each}}
     </div>
   {{/if}}
-  
 </section>
