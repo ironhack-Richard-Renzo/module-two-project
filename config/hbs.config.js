@@ -21,4 +21,13 @@ hbs.registerHelper('formError', (error) => {
 /** Content Helpers */
 hbs.registerHelper('limitChars', (maxChars, options) => {
     return options.fn().slice(0, maxChars) + '...';
-})
+});
+
+/** Location Helpers */
+hbs.registerHelper('getLatitude', (model) => {
+    return model.location.coordinates[1];
+});
+
+hbs.registerHelper('getLongitude', (model) => {
+    return model.location.coordinates[0];
+});

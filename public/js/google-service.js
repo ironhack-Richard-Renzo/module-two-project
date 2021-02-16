@@ -1,12 +1,26 @@
-var madrid = { lat: 40.416775, lng: -3.703790 };
-var map, marker;
+var latitude, longitude, map, marker;
 
+console.log('longitude => ', document.getElementById("lng-input").value);
+
+if (document.getElementById("lat-input").value !== '') {
+    latitude = Number(document.getElementById("lat-input").value);
+} else {
+    latitude = 40.416775;
+}
+
+if (document.getElementById("lng-input").value !== '') {
+    longitude = Number(document.getElementById("lng-input").value);
+} else {
+    longitude = -3.703790;
+}
+
+var coordinates = { lat: latitude, lng: longitude };
 
 // Initialize and add the map
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 4,
-        center: madrid,
+        center: coordinates,
         zoom: 18,
         zoomControl: true,
         mapTypeId: 'satellite',
@@ -23,7 +37,7 @@ function initMap() {
     });
 
     marker = new google.maps.Marker({
-        position: madrid,
+        position: coordinates,
         map: map,
     });
 }
