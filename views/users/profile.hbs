@@ -31,10 +31,12 @@
             <input type="password" name="password" placeholder="Password">
             <label>Repeat password</label>
             <input type="password" name="passwordMatch" placeholder="Repeat Password">
-            <label >Location: add your location to find sales near you!</label>
+            <label >Location: add your location to find sales near you!</label>            
             <input id="places-input" placeholder="Set your address" type="text" autocomplete="on" />
             <input id="lat-input" type="hidden" name="latitude" value="{{#if user.location.coordinates}}{{getLatitude user}}{{else}}{{ latitude }}{{/if}}" />
             <input id="lng-input" type="hidden" name="longitude" value="{{#if user.location.coordinates}}{{getLongitude user }}{{else}}{{ longitude }}{{/if}}" />
+            <br />
+            <p class="text-danger"><i class="fa fa-location-arrow"></i> Double click to change location!</p>
             <!--The div element for the map -->
             <div id="map"></div>
             <button type="submit">Update info</button>
