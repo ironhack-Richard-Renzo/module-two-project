@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const schema = new Schema({
+const bidsSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -36,22 +36,20 @@ const schema = new Schema({
             type: String, // Don't do `{ location: { type: String } }`
             enum: ['Point'], // 'location.type' must be 'Point'            
         },
-        coordinates: {
-            type: [Number]
-        }
+        coordinates: [Number]
     },
     expireDate: {
         type: Date,
         default: null
     },
     active: {
-        type: Boolean,
+        type: String,
         default: null
     }
 });
 
-schema.index({ location: '2dsphere' });
+bidsSchema.index({ location: '2dsphere' });
 
-const Bid = mongoose.model('Bid', schema);
+const Bid = mongoose.model('Bid', bidsSchema);
 
 module.exports = Bid;

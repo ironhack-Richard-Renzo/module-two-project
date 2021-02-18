@@ -1,0 +1,212 @@
+[1mdiff --git a/controllers/bids.controller.js b/controllers/bids.controller.js[m
+[1mindex 613c448..a594b08 100644[m
+[1m--- a/controllers/bids.controller.js[m
+[1m+++ b/controllers/bids.controller.js[m
+[36m@@ -16,23 +16,22 @@[m [mmodule.exports.create = (req, res, next) => {[m
+ };[m
+ [m
+ module.exports.doCreate = (req, res, next) => {[m
+[32m+[m
+     bidData = {[m
+         title: req.body.title,[m
+         description: req.body.description,[m
+         price: req.body.price,[m
+[31m-        web: req.body.web[m
+[32m+[m[32m        web: req.body.web,[m
+[32m+[m[32m        expireDate: req.body.expireDate,[m
+[32m+[m[32m        active: req.body.active[m
+     }[m
+ [m
+     if (req.file) bidData.image = req.file.path;[m
+ [m
+[31m-    if (req.body.latitude && req.body.longitude) {[m
+[31m-        req.body.location = {[m
+[31m-            type: "Point",[m
+[31m-            coordinates: [Number(req.body.longitude), Number(req.body.latitude)][m
+[31m-        };[m
+[31m-    } else {[m
+[31m-        req.body.location = undefined;[m
+[31m-    }[m
+[32m+[m[32m    bidData.location = {[m
+[32m+[m[32m        type: "Point",[m
+[32m+[m[32m        coordinates: [Number(req.body.longitude), Number(req.body.latitude)][m
+[32m+[m[32m    };[m
+ [m
+     bidData.author = req.user.name;[m
+     bidData.product = req.body.product;[m
+[1mdiff --git a/models/bid.model.js b/models/bid.model.js[m
+[1mindex 2d842db..1deb3a6 100644[m
+[1m--- a/models/bid.model.js[m
+[1m+++ b/models/bid.model.js[m
+[36m@@ -1,7 +1,7 @@[m
+ const mongoose = require('mongoose');[m
+ const Schema = mongoose.Schema;[m
+ [m
+[31m-const schema = new Schema({[m
+[32m+[m[32mconst bidsSchema = new Schema({[m
+     title: {[m
+         type: String,[m
+         required: true,[m
+[36m@@ -36,22 +36,20 @@[m [mconst schema = new Schema({[m
+             type: String, // Don't do `{ location: { type: String } }`[m
+             enum: ['Point'], // 'location.type' must be 'Point'            [m
+         },[m
+[31m-        coordinates: {[m
+[31m-            type: [Number][m
+[31m-        }[m
+[32m+[m[32m        coordinates: [Number][m
+     },[m
+     expireDate: {[m
+         type: Date,[m
+         default: null[m
+     },[m
+     active: {[m
+[31m-        type: Boolean,[m
+[32m+[m[32m        type: String,[m
+         default: null[m
+     }[m
+ });[m
+ [m
+[31m-schema.index({ location: '2dsphere' });[m
+[32m+[m[32mbidsSchema.index({ location: '2dsphere' });[m
+ [m
+[31m-const Bid = mongoose.model('Bid', schema);[m
+[32m+[m[32mconst Bid = mongoose.model('Bid', bidsSchema);[m
+ [m
+ module.exports = Bid;[m
+\ No newline at end of file[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 3d727a9..e8e5b60 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -1,44 +1,44 @@[m
+ {[m
+[31m-  "name": "christmas-project",[m
+[31m-  "version": "1.0.0",[m
+[31m-  "description": "",[m
+[31m-  "main": "app.js",[m
+[31m-  "scripts": {[m
+[31m-    "start": "node app.js",[m
+[31m-    "dev": "nodemon -e hbs,js,css app.js",[m
+[31m-    "seeds": "node bin/seeds.js"[m
+[31m-  },[m
+[31m-  "author": "",[m
+[31m-  "license": "ISC",[m
+[31m-  "dependencies": {[m
+[31m-    "bcrypt": "^5.0.0",[m
+[31m-    "cloudinary": "^1.24.0",[m
+[31m-    "connect-mongo": "^3.2.0",[m
+[31m-    "dotenv": "^8.2.0",[m
+[31m-    "express": "^4.17.1",[m
+[31m-    "express-session": "^1.17.1",[m
+[31m-    "faker": "^5.2.0",[m
+[31m-    "hbs": "^4.1.1",[m
+[31m-    "http-errors": "^1.8.0",[m
+[31m-    "mongoose": "^5.11.11",[m
+[31m-    "morgan": "^1.10.0",[m
+[31m-    "multer": "^1.4.2",[m
+[31m-    "multer-storage-cloudinary": "^4.0.0",[m
+[31m-    "nodemailer": "^6.4.17",[m
+[31m-    "passport": "^0.4.1",[m
+[31m-    "passport-google-oauth": "^2.0.0",[m
+[31m-    "passport-local": "^1.0.0"[m
+[31m-  },[m
+[31m-  "devDependencies": {[m
+[31m-    "eslint": "^7.7.0",[m
+[31m-    "eslint-config-prettier": "^6.11.0",[m
+[31m-    "eslint-config-standard": "^14.1.1",[m
+[31m-    "eslint-plugin-import": "^2.22.0",[m
+[31m-    "eslint-plugin-node": "^11.1.0",[m
+[31m-    "eslint-plugin-prettier": "^3.1.4",[m
+[31m-    "eslint-plugin-promise": "^4.2.1",[m
+[31m-    "eslint-plugin-standard": "^4.0.1",[m
+[31m-    "nodemon": "^2.0.4",[m
+[31m-    "prettier": "^2.1.1"[m
+[31m-  }[m
+[31m-}[m
+[32m+[m[32m    "name": "module-two-project",[m
+[32m+[m[32m    "version": "1.0.0",[m
+[32m+[m[32m    "description": "",[m
+[32m+[m[32m    "main": "app.js",[m
+[32m+[m[32m    "scripts": {[m
+[32m+[m[32m        "start": "node app.js",[m
+[32m+[m[32m        "dev": "nodemon -e hbs,js,css app.js",[m
+[32m+[m[32m        "seeds": "node bin/seeds.js"[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "author": "",[m
+[32m+[m[32m    "license": "ISC",[m
+[32m+[m[32m    "dependencies": {[m
+[32m+[m[32m        "bcrypt": "^5.0.0",[m
+[32m+[m[32m        "cloudinary": "^1.24.0",[m
+[32m+[m[32m        "connect-mongo": "^3.2.0",[m
+[32m+[m[32m        "dotenv": "^8.2.0",[m
+[32m+[m[32m        "express": "^4.17.1",[m
+[32m+[m[32m        "express-session": "^1.17.1",[m
+[32m+[m[32m        "faker": "^5.2.0",[m
+[32m+[m[32m        "hbs": "^4.1.1",[m
+[32m+[m[32m        "http-errors": "^1.8.0",[m
+[32m+[m[32m        "mongoose": "^5.11.11",[m
+[32m+[m[32m        "morgan": "^1.10.0",[m
+[32m+[m[32m        "multer": "^1.4.2",[m
+[32m+[m[32m        "multer-storage-cloudinary": "^4.0.0",[m
+[32m+[m[32m        "nodemailer": "^6.4.17",[m
+[32m+[m[32m        "passport": "^0.4.1",[m
+[32m+[m[32m        "passport-google-oauth": "^2.0.0",[m
+[32m+[m[32m        "passport-local": "^1.0.0"[m
+[32m+[m[32m    },[m
+[32m+[m[32m    "devDependencies": {[m
+[32m+[m[32m        "eslint": "^7.7.0",[m
+[32m+[m[32m        "eslint-config-prettier": "^6.11.0",[m
+[32m+[m[32m        "eslint-config-standard": "^14.1.1",[m
+[32m+[m[32m        "eslint-plugin-import": "^2.22.0",[m
+[32m+[m[32m        "eslint-plugin-node": "^11.1.0",[m
+[32m+[m[32m        "eslint-plugin-prettier": "^3.1.4",[m
+[32m+[m[32m        "eslint-plugin-promise": "^4.2.1",[m
+[32m+[m[32m        "eslint-plugin-standard": "^4.0.1",[m
+[32m+[m[32m        "nodemon": "^2.0.4",[m
+[32m+[m[32m        "prettier": "^2.1.1"[m
+[32m+[m[32m    }[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/views/bids/detail.hbs b/views/bids/detail.hbs[m
+[1mindex 134527f..43e81e9 100644[m
+[1m--- a/views/bids/detail.hbs[m
+[1m+++ b/views/bids/detail.hbs[m
+[36m@@ -11,10 +11,12 @@[m
+         Author: {{bid.author}}[m
+       </h6>[m
+       <p class="card-text">{{post.description}}</p>[m
+[31m-[m
+[32m+[m[32m      <input id="lat-input" type="hidden" name="latitude" value="{{#if bid.location.coordinates}}{{getLatitude bid}}{{else}}{{ latitude }}{{/if}}" />[m
+[32m+[m[32m      <input id="lng-input" type="hidden" name="longitude" value="{{#if bid.location.coordinates}}{{getLongitude bid }}{{else}}{{ longitude }}{{/if}}" />[m
+[32m+[m[32m      <!--The div element for the map -->[m
+[32m+[m[32m      <div id="map"></div>[m
+       <div class="d-flex">[m
+[31m-        <a class="btn btn-primary mr-3" href="/bids/{{bid.id}}/edit"><i class="fa fa-cog mr-2"></i>Edit</a>[m
+[31m-        [m
+[32m+[m[32m        <a class="btn btn-primary mr-3" href="/bids/{{bid.id}}/edit"><i class="fa fa-cog mr-2"></i>Edit</a>[m[41m        [m
+         <form action="/bids/{{bid.id}}/delete" method="POST">[m
+           <button type="submit" class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Delete</button>[m
+         </form>[m
+[1mdiff --git a/views/bids/new.hbs b/views/bids/new.hbs[m
+[1mindex 6a1f1fd..b332a22 100644[m
+[1m--- a/views/bids/new.hbs[m
+[1m+++ b/views/bids/new.hbs[m
+[36m@@ -24,14 +24,14 @@[m
+         </select>[m
+         {{/if}}[m
+         <input id="places-input" placeholder="Set the Bid location" type="text" autocomplete="on" />[m
+[31m-        <input id="lat-input" type="hidden" name="latitude" value="{{#if bid.location.coordinates}}{{getLatitude bid}}{{else}}{{ latitude }}{{/if}}" />[m
+[31m-        <input id="lng-input" type="hidden" name="longitude" value="{{#if bid.location.coordinates}}{{getLongitude bid }}{{else}}{{ longitude }}{{/if}}" />[m
+[32m+[m[32m        <input id="lat-input" type="hidden" name="latitude" />[m
+[32m+[m[32m        <input id="lng-input" type="hidden" name="longitude" />[m
+         <!--The div element for the map -->[m
+         <div id="map"></div>        [m
+         <label for="expireDate">Expire date</label>[m
+         <input name="expireDate" id="expireDate" type="date" value="{{ bid.expireDate }}" />[m
+         <div>[m
+[31m-          <input name="active" id="active" type="checkbox" value="{{ bid.active }}" /> <label for="active">Active</label>[m
+[32m+[m[32m          <input name="active" id="active" type="checkbox" /> <label for="active">Active</label>[m
+         </div>[m
+         <button type="submit" class="btn btn-primary">Create Bid</button>[m
+       </form>[m

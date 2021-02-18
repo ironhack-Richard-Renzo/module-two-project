@@ -24,14 +24,14 @@
         </select>
         {{/if}}
         <input id="places-input" placeholder="Set the Bid location" type="text" autocomplete="on" />
-        <input id="lat-input" type="hidden" name="latitude" value="{{#if bid.location.coordinates}}{{getLatitude bid}}{{else}}{{ latitude }}{{/if}}" />
-        <input id="lng-input" type="hidden" name="longitude" value="{{#if bid.location.coordinates}}{{getLongitude bid }}{{else}}{{ longitude }}{{/if}}" />
+        <input id="lat-input" type="hidden" name="latitude" />
+        <input id="lng-input" type="hidden" name="longitude" />
         <!--The div element for the map -->
         <div id="map"></div>        
         <label for="expireDate">Expire date</label>
         <input name="expireDate" id="expireDate" type="date" value="{{ bid.expireDate }}" />
         <div>
-          <input name="active" id="active" type="checkbox" value="{{ bid.active }}" /> <label for="active">Active</label>
+          <input name="active" id="active" type="checkbox" /> <label for="active">Active</label>
         </div>
         <button type="submit" class="btn btn-primary">Create Bid</button>
       </form>
