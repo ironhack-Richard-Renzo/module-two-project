@@ -41,7 +41,6 @@ function initMap() {
     });
 
     google.maps.event.addListener(map, 'dblclick', function(e) {
-        console.log('double click event => ', e.latLng);
         onPlaceClicked(e.latLng);
     });
 }
