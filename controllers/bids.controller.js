@@ -16,23 +16,22 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.doCreate = (req, res, next) => {
+
     bidData = {
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
-        web: req.body.web
+        web: req.body.web,
+        expireDate: req.body.expireDate,
+        active: req.body.active
     }
 
     if (req.file) bidData.image = req.file.path;
 
-    if (req.body.latitude && req.body.longitude) {
-        req.body.location = {
-            type: "Point",
-            coordinates: [Number(req.body.longitude), Number(req.body.latitude)]
-        };
-    } else {
-        req.body.location = undefined;
-    }
+    bidData.location = {
+        type: "Point",
+        coordinates: [Number(req.body.longitude), Number(req.body.latitude)]
+    };
 
     bidData.author = req.user.name;
     bidData.product = req.body.product;
