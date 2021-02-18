@@ -1,7 +1,5 @@
 var latitude, longitude, map, marker;
 
-console.log('longitude => ', document.getElementById("lng-input").value);
-
 if (document.getElementById("lat-input").value !== '') {
     latitude = Number(document.getElementById("lat-input").value);
 } else {
@@ -26,19 +24,25 @@ function initMap() {
         mapTypeId: 'satellite',
         heading: 90,
         tilt: 0,
-        disableDefaultUI: true
+        disableDefaultUI: true,
+        disableDoubleClickZoom: true
     });
 
     input = document.getElementById('places-input');
-    autocomplete = new google.maps.places.Autocomplete(this.input);
+    autocomplete = new google.maps.places.Autocomplete(input);
     autocomplete.addListener('place_changed', () => {
-        const place = this.autocomplete.getPlace();
+        const place = autocomplete.getPlace();
         onPlaceChanged(place);
     });
 
     marker = new google.maps.Marker({
         position: coordinates,
         map: map,
+    });
+
+    google.maps.event.addListener(map, 'dblclick', function(e) {
+        console.log('double click event => ', e.latLng);
+        onPlaceClicked(e.latLng);
     });
 }
 
@@ -49,4 +53,11 @@ function onPlaceChanged(place) {
     marker.setPosition(place.geometry.location);
     document.getElementById("lat-input").value = place.geometry.location.lat();
     document.getElementById("lng-input").value = place.geometry.location.lng();
+}
+
+function onPlaceClicked(latLng) {
+    map.panTo(latLng);
+    marker.setPosition(latLng);
+    document.getElementById("lat-input").value = latLng.lat();
+    document.getElementById("lng-input").value = latLng.lng();
 }
