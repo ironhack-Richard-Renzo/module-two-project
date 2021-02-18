@@ -2,6 +2,8 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 const Product = require('../models/product.model');
 
+const resultsPerPage = 9;
+
 module.exports.list = (req, res, next) => {
     
     const { category, name } = req.query
@@ -9,8 +11,18 @@ module.exports.list = (req, res, next) => {
     if (category) filter.category = category;
     if (name) filter.name = new RegExp(name, "i"); 
 
+    const skip = (req.query.page || 0) * resultsPerPage;
+
+    const currentPage = req.query.page || 0;
+    let previousPage = 0;
+    if ( currentPage >= 0 ) previousPage = currentPage - 1;
+    const nextPage = Number(currentPage) + 1;
+
     Product.find(filter)
-        .then((products) => res.render('products/list', { products }))
+        .skip(skip)
+        .limit(resultsPerPage)
+        .sort('_id') 
+        .then((products) => res.render('products/list', { products, currentPage, previousPage, nextPage }))
         .catch(next);
 };
 
