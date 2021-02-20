@@ -3,13 +3,19 @@
   <h1>Bid listing</h1>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
 </section>
-<form action="/bids" method="get" >
-  <label for="distance">Bid distance: </label>
-  <input type="range" max="100000" min="0" step="100" value="5000" name="distance">
-  <button type="submit">Search</button>
-</form>
 
-<section>
+<section class="bids-content">
+  <div class="filters">
+    <form method="GET" action="/bids">
+      <label class="title" for="distance">Bid distance: </label><br>
+      <input class="form-range" type="range" max="1000000" min="0" step="1000" name="distance"><br>
+      <hr>
+      <label class="title">Search</label>
+      <input type="text" name="name" placeholder="Product name">
+      <hr>      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
   {{#if bids}}
     <div class="bid-grid">
       {{#each bids as |bid| }}

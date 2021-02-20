@@ -5,16 +5,18 @@ const Product = require('../models/product.model');
 
 module.exports.list = (req, res, next) => {
 
-    const distance = req.query.distance;
-    Bid.find({
-        location: {
-            $near: {
-                $geometry: { type: "Point", coordinates: [req.user.location.coordinates[0], req.user.location.coordinates[1]] },
-                $minDistance: 0,
-                $maxDistance: distance || 5000
-            }
+    const { title, distance, location } = req.query
+    const filter = {}
+    if (title) filter.title = new RegExp(name, "i"); 
+    if (location) filter.location = {
+        $near: {
+            $geometry: { type: "Point", coordinates: [req.user.location.coordinates[0], req.user.location.coordinates[1]] },
+            $minDistance: 0,
+            $maxDistance: distance || 100000000,
         }
-    }).then((bids) => {
+    }
+
+    Bid.find(filter).then((bids) => {
         console.log('bibs found =>', bids);
         res.render('bids/list', { bids });
     }).catch(next);

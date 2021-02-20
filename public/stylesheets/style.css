@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
 ul {
     list-style: none;
     padding: 0;
@@ -85,6 +87,15 @@ nav img {
     border-radius: 50%;
 }
 
+.navbar-brand, .brand span {
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+}
 
 /* Footer */
 
@@ -226,7 +237,7 @@ nav img {
     font-weight: 300;
 }
 
-.product-content {
+.product-content, .bids-content {
     display: flex;
 }
 
@@ -338,7 +349,7 @@ p.product-cat {
 /* Bid Listing Page */
 .bid-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
 }
 
