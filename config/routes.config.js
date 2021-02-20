@@ -38,10 +38,11 @@ router.post('/profile', secure.isAuthenticated, storage.single('avatar'), usersC
 // Routes for Products
 router.get('/products', secure.isAuthenticated, productsController.list);
 router.get('/products/new', secure.isAuthenticated, productsController.create);
-router.post('/products', secure.isAuthenticated, productsController.doCreate);
+router.post('/products', secure.isAuthenticated, storage.single('image'), productsController.doCreate);
 router.get('/products/:id', secure.isAuthenticated, productsController.detail);
 router.get('/products/:id/edit', secure.isAuthenticated, productsController.edit);
-router.post('/products/:id/edit', secure.isAuthenticated, productsController.doEdit);
+router.get('/products/new', secure.isAuthenticated, productsController.create);
+router.post('/products/:id/edit', secure.isAuthenticated, storage.single('image'), productsController.doEdit);
 router.post('/products/:id/delete', secure.isAuthenticated, productsController.delete);
 
 

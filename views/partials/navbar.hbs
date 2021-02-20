@@ -13,9 +13,9 @@
           <li class="nav-item">
             <form action="/logout" method="POST">
               <a href="/profile"><span class="mr-3 text-muted"><img src="{{currentUser.avatar}}"></a>
-               <a class="btn btn-warning btn-sm" href="/products/new"><i class="fa fa-plus-square" aria-hidden="true"></i></a>
-              <a class="btn btn-warning btn-sm" href="/bids/new"><i class="fa fa-tag" aria-hidden="true"></i></a>     
-              <button type="submit" class="btn btn-danger btn-sm" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></button>
+               <a class="btn btn-warning btn-sm" href="/products/new"><i class="fa fa-plus-square" aria-hidden="true"></i> New Product</a>
+              <a class="btn btn-warning btn-sm" href="/bids/new"><i class="fa fa-tag" aria-hidden="true"></i> New Bid</a>     
+              <button type="submit" class="btn btn-danger btn-sm" href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</button>
             </form>
           </li>
         {{else}}
