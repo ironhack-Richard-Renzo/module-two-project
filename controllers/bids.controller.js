@@ -5,21 +5,34 @@ const Product = require('../models/product.model');
 
 module.exports.list = (req, res, next) => {
 
-    const { title, distance, location } = req.query
-    const filter = {}
-    if (title) filter.title = new RegExp(name, "i");
-    if (location) filter.location = {
-        $near: {
-            $geometry: { type: "Point", coordinates: [req.user.location.coordinates[0], req.user.location.coordinates[1]] },
-            $minDistance: 0,
-            $maxDistance: distance || 100000000,
-        }
-    }
+    // const { title, distance, location } = req.query
+    // const filter = {}
+    // if (title) filter.title = new RegExp(name, "i"); 
+    // if (location) filter.location = {
+    //     $near: {
+    //         $geometry: { type: "Point", coordinates: [req.user.location.coordinates[0], req.user.location.coordinates[1]] },
+    //         $minDistance: 0,
+    //         $maxDistance: distance || 100000000,
+    //     }
+    // }
 
-    Bid.find(filter).then((bids) => {
-        console.log('bibs found =>', bids);
-        res.render('bids/list', { bids });
-    }).catch(next);
+    const distanceToMe = [{
+        $geoNear: {
+            near: {
+                type: 'Point',
+                coordinates: [req.user.location.coordinates[0], req.user.location.coordinates[1]]
+            },
+            spherical: true,
+            distanceField: 'distanceFromMe'
+        }
+    }];
+
+    Bid.aggregate(distanceToMe)
+        .sort('distanceFromMe')
+        .then((bids) => {
+            bids.map(index => { return index.distanceFromMe = (index.distanceFromMe / 1000).toFixed(2) })
+            res.render('bids/list', { bids });
+        }).catch(next);
 };
 
 module.exports.create = (req, res, next) => {
