@@ -5,7 +5,7 @@
 </section>
 
 <section class="bids-content">
-  <div class="filters">
+  {{!-- <div class="filters">
     <form method="GET" action="/bids">
       <label class="title" for="distance">Bid distance: </label><br>
       <input class="form-range" type="range" max="1000000" min="0" step="1000" name="distance"><br>
@@ -15,7 +15,7 @@
       <hr>      
       <button type="submit">Submit</button>
     </form>
-  </div>
+  </div> --}}
   {{#if bids}}
     <div class="bid-grid">
       {{#each bids as |bid| }}
@@ -27,7 +27,7 @@
           <img class="card-img-top" src="{{ bid.image }}" alt="{{ bid.title }}">
           <div class="bid-info">
             <p class="bid-desc">{{#limitChars 100}}{{ bid.description }}{{/limitChars}}</p>
-            <small>XXkm of you</small>
+            <small>{{ bid.distanceFromMe }} km from you</small>
           </div>
           <div class="rip"></div>
           <div class="bid-footer">
