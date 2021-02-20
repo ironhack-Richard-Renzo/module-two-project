@@ -63,9 +63,18 @@ a:hover {
     margin: 20px 0;
 }
 
+.login-with-google {
+    border: solid 1px #1a1a1a;
+    border-radius: 0;
+}
+
 .login-content span.invalid {
     padding: 10px 20px;
     background-color: #ffbdbd;
+}
+
+.or {
+    text-align: center;
 }
 
 
@@ -221,6 +230,13 @@ nav img {
     display: flex;
 }
 
+.product-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+}
+
 .filters {
     padding-right: 25px;
     position: sticky;
@@ -285,6 +301,38 @@ p.product-cat {
 .product-detail img {
     max-width: 100%;
     height: auto;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-info h1 {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.product-info span {
+    font-size: 30px;
+    font-weight: lighter;
+    margin: 20px 0;
+}
+
+.product-info p {
+    font-size: 14px;
+}
+
+.product-info form.add-to-wishlist {
+    text-align: center;
+    border: solid 1px #1a1a1a;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.product-actions {
+    display: flex;
 }
 
 /* Bid Listing Page */

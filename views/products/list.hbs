@@ -27,26 +27,32 @@
       <button type="submit">Submit</button>
     </form>
   </div>
-  {{#if products}}
-  <div class="product-grid">
-    {{#each products as |product|}}
-    <div class="product">
-      <a href="/products/{{product.id}}">
-        <img class="product-img" src="{{ product.image }}" alt="{{ product.name }}">
-        <div class="product-info">
-          <p class="product-cat">{{ product.category }}</p>
-          <h2>{{ product.name }}</h2>
-          <p class="price">{{ product.price }} €</p>
-        </div>
-      </a>
-      <form class="add-to-wishlist" action="/add-to-wishlist/{{product.id}}" method="POST">
-          <button type="submit" class="btn btn-danger"><i class="fa fa-heart-o"></i></button>
-      </form>
+  <div>
+    {{#if products}}
+    <div class="product-grid">
+      {{#each products as |product|}}
+      <div class="product">
+        <a href="/products/{{product.id}}">
+          <img class="product-img" src="{{ product.image }}" alt="{{ product.name }}">
+          <div class="product-info">
+            <p class="product-cat">{{ product.category }}</p>
+            <h2>{{ product.name }}</h2>
+            <p class="price">{{ product.price }} €</p>
+          </div>
+        </a>
+        <form class="add-to-wishlist" action="/add-to-wishlist/{{product.id}}" method="POST">
+            <button type="submit" class="btn btn-danger"><i class="fa fa-heart-o"></i></button>
+        </form>
+      </div>
+      {{/each}}
     </div>
-    {{/each}}
-    <a href="?page={{previousPage}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a><p style="text-align: center;">Page: {{currentPage}}</p><a href="?page={{nextPage}}" style="text-align: right;"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+    {{/if}}
+    <div class="product-pagination">
+      <a href="?page={{previousPage}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+      <p style="text-align: center;">Page: {{currentPage}}</p>
+      <a href="?page={{nextPage}}" style="text-align: right;"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+    </div>
   </div>
-  {{/if}}
-  
 </section>
+
 
