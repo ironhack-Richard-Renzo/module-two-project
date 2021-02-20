@@ -15,7 +15,7 @@ router.get('/bids/new', secure.isAuthenticated, bidsController.create);
 router.post('/bids', secure.isAuthenticated, storage.single('image'), bidsController.doCreate);
 router.get('/bids/:id', secure.isAuthenticated, bidsController.detail);
 router.get('/bids/:id/edit', secure.isAuthenticated, bidsController.edit);
-router.post('/bids/:id/edit', secure.isAuthenticated, bidsController.doEdit);
+router.post('/bids/:id/edit', secure.isAuthenticated, storage.single('image'), bidsController.doEdit);
 router.post('/bids/:id/delete', secure.isAuthenticated, bidsController.delete);
 //router.post('/bids/:bidId/comments', secure.isAuthenticated, commentsController.create);
 router.post('/logout', secure.isAuthenticated, usersController.logout);

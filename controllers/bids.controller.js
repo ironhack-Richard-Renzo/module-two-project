@@ -16,7 +16,7 @@ module.exports.list = (req, res, next) => {
     //     }
     // }
 
-    const distanceToMe = [{ 
+    const distanceToMe = [{
         $geoNear: {
             near: {
                 type: 'Point',
@@ -26,13 +26,13 @@ module.exports.list = (req, res, next) => {
             distanceField: 'distanceFromMe'
         }
     }];
-    
+
     Bid.aggregate(distanceToMe)
         .sort('distanceFromMe')
         .then((bids) => {
             bids.map(index => { return index.distanceFromMe = (index.distanceFromMe / 1000).toFixed(2) })
             res.render('bids/list', { bids });
-    }).catch(next);
+        }).catch(next);
 };
 
 module.exports.create = (req, res, next) => {
@@ -83,7 +83,9 @@ module.exports.detail = (req, res, next) => {
         .populate('comments')
         .then((bid) => {
             if (bid) {
-                res.render('bids/detail', { bid });
+                Product.find()
+                    .then((products) =>
+                        res.render('bids/detail', { products, bid }));
             } else {
                 res.redirect('/bids');
             }
@@ -104,12 +106,27 @@ module.exports.edit = (req, res, next) => {
 };
 
 module.exports.doEdit = (req, res, next) => {
-    Bid.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true })
+    bidData = {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        web: req.body.web,
+        expireDate: req.body.expireDate,
+        active: req.body.active
+    }
+
+    if (req.file) bidData.image = req.file.path;
+
+    bidData.location = {
+        type: "Point",
+        coordinates: [Number(req.body.longitude), Number(req.body.latitude)]
+    };
+    Bid.findByIdAndUpdate(req.params.id, { $set: bidData }, { runValidators: true })
         .then((bid) => {
             if (bid) {
-                res.render('bids/detail', { bid });
+                res.redirect('/bids');
             } else {
-                next(createError(404, 'Bid does not exists'));
+                next(createError(404, 'bid does not exists'));
             }
         })
         .catch((error) => {

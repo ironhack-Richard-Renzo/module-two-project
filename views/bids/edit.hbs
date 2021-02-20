@@ -3,32 +3,39 @@
   
   <hr class="mt-0" />
 
-  <div id="updateprofile" class="update-profile">
-    <form action="/">
-
+  <div class="add-bid">
+    <form action="/bids/{{bid.id}}/edit" method="POST" enctype="multipart/form-data">
+        <label for="title">Title</label>
+        <input name="title" type="text" id="title" placeholder="Enter title" value="{{ bid.title }}">
+        <label for="image">Image</label>
+        <input name="image" type="file" id="bid" placeholder="Enter image">
+        <label for="description">Description</label>
+        <textarea name="description" type="text" id="description" placeholder="Enter bid description" rows="10">{{ bid.description }}</textarea>
+        <label for="price">Price</label>
+        <input name="price" type="text" id="price" placeholder="Enter title" value="{{ bid.price }}">
+        <label for="web">Web</label>
+        <input name="web" type="text" id="web" placeholder="" value="{{ bid.web }}">
+        <label for="product">Product</label>
+        {{#if products}}
+        <select name="product" id="product">
+          {{#each products as |product|}}
+            <option value="{{product.id}}">{{product.name}}</option>
+          {{/each}}
+        </select>
+        {{/if}}
+        <input id="places-input" placeholder="Set the Bid location" type="text" autocomplete="on" />
+        <input id="lat-input" type="hidden" name="latitude" value="{{#if bid.location.coordinates}}{{getLatitude bid}}{{else}}{{ latitude }}{{/if}}" />
+        <input id="lng-input" type="hidden" name="longitude" value="{{#if bid.location.coordinates}}{{getLongitude bid }}{{else}}{{ longitude }}{{/if}}" />
+        <br />
+        <p class="text-danger"><i class="fa fa-location-arrow"></i> Double click to change location!</p>
+        <!--The div element for the map -->
+        <div id="map"></div>        
+        <label for="expireDate">Expire date</label>
+        <input name="expireDate" id="expireDate" type="date" value="{{ bid.expireDate }}" />
+        <div>
+          <input name="active" id="active" type="checkbox" /> <label for="active">Active</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Bid</button>
     </form>
   </div>
-
-  <form action="/bids/{{post.id}}/edit" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input name="title" type="text" class="form-control {{isInvalid errors.title}}" id="title" placeholder="Enter title" value="{{ bid.title }}">
-      {{formError errors.title}}
-    </div>
-
-    <div class="form-group">
-      <label for="image">Image</label>
-      <input name="image" type="file" class="form-control {{isInvalid errors.image}}" id="image" placeholder="Enter image" value="{{ bid.image }}">
-      {{formError errors.image}}
-    </div>
-
-    <div class="form-group">
-      <label for="text">Description</label>
-      <textarea name="text" type="text" class="form-control {{isInvalid errors.description}}" id="description" placeholder="Enter bid description"
-        rows="10">{{ bid.description }}</textarea>
-      {{formError errors.description}}
-    </div>
-
-    <button type="submit" class="btn btn-primary">Edit Bid</button>
-  </form>
 </section>
