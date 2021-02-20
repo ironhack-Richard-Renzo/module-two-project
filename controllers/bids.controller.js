@@ -77,8 +77,6 @@ module.exports.doCreate = (req, res, next) => {
 };
 
 module.exports.detail = (req, res, next) => {
-    console.log(req.headers);
-
     Bid.findById(req.params.id)
         .populate('comments')
         .then((bid) => {

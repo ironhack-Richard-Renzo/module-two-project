@@ -5,23 +5,23 @@ const Product = require('../models/product.model');
 const resultsPerPage = 9;
 
 module.exports.list = (req, res, next) => {
-    
+
     const { category, name } = req.query
     const filter = {}
     if (category) filter.category = category;
-    if (name) filter.name = new RegExp(name, "i"); 
+    if (name) filter.name = new RegExp(name, "i");
 
     const skip = (req.query.page || 0) * resultsPerPage;
 
     const currentPage = req.query.page || 0;
     let previousPage = 0;
-    if ( currentPage >= 0 ) previousPage = currentPage - 1;
+    if (currentPage >= 0) previousPage = currentPage - 1;
     const nextPage = Number(currentPage) + 1;
 
     Product.find(filter)
         .skip(skip)
         .limit(resultsPerPage)
-        .sort('_id') 
+        .sort('_id')
         .then((products) => res.render('products/list', { products, currentPage, previousPage, nextPage }))
         .catch(next);
 };
@@ -31,7 +31,19 @@ module.exports.create = (req, res, next) => {
 };
 
 module.exports.doCreate = (req, res, next) => {
-    Product.create({...req.body })
+
+    productData = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        web: req.body.web,
+        category: req.body.category,
+        brand: req.body.brand
+    }
+
+    if (req.file) productData.image = req.file.path;
+
+    Product.create(productData)
         .then((product) => res.redirect(`/products/${product.id}`))
         .catch((error) => {
             if (error instanceof mongoose.Error.ValidationError) {
@@ -72,7 +84,19 @@ module.exports.edit = (req, res, next) => {
 };
 
 module.exports.doEdit = (req, res, next) => {
-    Product.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true })
+
+    productData = {
+        name: req.body.name,
+        description: req.body.description,
+        price: req.body.price,
+        web: req.body.web,
+        category: req.body.category,
+        brand: req.body.brand
+    }
+
+    if (req.file) productData.image = req.file.path;
+
+    Product.findByIdAndUpdate(req.params.id, { $set: productData }, { runValidators: true })
         .then((product) => {
             if (product) {
                 res.render('products/detail', { product });

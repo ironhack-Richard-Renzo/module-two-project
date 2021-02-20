@@ -3,51 +3,30 @@
 
   <hr class="mt-0" />
 
-  <form action="/products" method="POST">
-    <div class="form-group">
+  <div class="add-bid">
+    <form action="/products" method="POST" enctype="multipart/form-data">
       <label for="name">Name</label>
-      <input name="name" type="text" class="form-control " id="name" placeholder="Enter name" value="{{ post.name }}">
-    </div>
-
-    <div class="form-group">
+      <input name="name" type="text" id="name" placeholder="Enter name" value="{{ product.name }}">
       <label for="image">Image</label>
-      <input name="image" type="text" class="form-control " id="image" placeholder="Enter image" value="{{ post.image }}">
-    </div>
-
-    <div class="form-group">
+      <input name="image" type="file" id="image" placeholder="Enter image" value="{{ product.image }}">
       <label for="description">Description</label>
-      <textarea name="description" type="text" class="form-control " id="description" placeholder="Enter product description" rows="10">{{ post.description }}</textarea>
-    </div>
-
-    <div class="form-group">
+      <textarea name="description" type="text" id="description" placeholder="Enter product description" rows="10">{{ product.description }}</textarea>
       <label for="price">Price</label>
-      <input name="price" type="text" class="form-control " id="price" placeholder="Enter price" value="{{ post.price }}">
-    </div>
-
-    <div class="form-group">
+      <input name="price" type="text" id="price" placeholder="Enter price" value="{{ product.price }}">
       <label for="web">Web</label>
-      <input name="web" type="text" class="form-control " id="web" placeholder="Enter website" value="{{ post.web }}">      
-    </div>
-
-    <div class="form-group">
+      <input name="web" type="text" id="web" placeholder="Enter website" value="{{ product.web }}">      
       <label for="category">Category</label>
-        <select name="category" id="category" >
-            <option value="Mobile">Mobile</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Home">Home</option>
-            <option value="Tools">Tools</option>
-            <option value="Videogames">Videogames</option>
-            <option value="Other">Other</option>
-        </select>
-        {{formError errors.category}}
-    </div>
-
-    <div class="form-group">
+      <select name="category" id="category" >
+        <option value="Mobile">Mobile</option>
+        <option value="Clothes">Clothes</option>
+        <option value="Home">Home</option>
+        <option value="Tools">Tools</option>
+        <option value="Videogames">Videogames</option>
+        <option value="Other">Other</option>
+      </select>
       <label for="brand">Brand</label>
-      <input name="brand" type="text" class="form-control " id="brand" placeholder="Enter brand" value="{{ post.brand }}">
-      {{formError errors.brand}}
-    </div>
-
-    <button type="submit" class="btn btn-primary">Create Product</button>
-  </form>
+      <input name="brand" type="text" id="brand" placeholder="Enter brand" value="{{ product.brand }}">
+      <button type="submit" class="btn btn-primary">Create Product</button>
+    </form>
+  </div>
 </section>
