@@ -7,7 +7,7 @@ module.exports.list = (req, res, next) => {
 
     const { title, distance, location } = req.query
     const filter = {}
-    if (title) filter.title = new RegExp(name, "i"); 
+    if (title) filter.title = new RegExp(name, "i");
     if (location) filter.location = {
         $near: {
             $geometry: { type: "Point", coordinates: [req.user.location.coordinates[0], req.user.location.coordinates[1]] },
@@ -70,7 +70,9 @@ module.exports.detail = (req, res, next) => {
         .populate('comments')
         .then((bid) => {
             if (bid) {
-                res.render('bids/detail', { bid });
+                Product.find()
+                    .then((products) =>
+                        res.render('bids/detail', { products, bid }));
             } else {
                 res.redirect('/bids');
             }
@@ -91,12 +93,27 @@ module.exports.edit = (req, res, next) => {
 };
 
 module.exports.doEdit = (req, res, next) => {
-    Bid.findByIdAndUpdate(req.params.id, { $set: req.body }, { runValidators: true })
+    bidData = {
+        title: req.body.title,
+        description: req.body.description,
+        price: req.body.price,
+        web: req.body.web,
+        expireDate: req.body.expireDate,
+        active: req.body.active
+    }
+
+    if (req.file) bidData.image = req.file.path;
+
+    bidData.location = {
+        type: "Point",
+        coordinates: [Number(req.body.longitude), Number(req.body.latitude)]
+    };
+    Bid.findByIdAndUpdate(req.params.id, { $set: bidData }, { runValidators: true })
         .then((bid) => {
             if (bid) {
-                res.render('bids/detail', { bid });
+                res.redirect('/bids');
             } else {
-                next(createError(404, 'Bid does not exists'));
+                next(createError(404, 'bid does not exists'));
             }
         })
         .catch((error) => {
