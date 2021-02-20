@@ -4,9 +4,20 @@ const Bid = require('../models/bid.model');
 const Product = require('../models/product.model');
 
 module.exports.list = (req, res, next) => {
-    Bid.find()
-        .then((bids) => res.render('bids/list', { bids }))
-        .catch(next);
+
+    const distance = req.query.distance;
+    Bid.find({
+        location: {
+            $near: {
+                $geometry: { type: "Point", coordinates: [req.user.location.coordinates[0], req.user.location.coordinates[1]] },
+                $minDistance: 0,
+                $maxDistance: distance || 5000
+            }
+        }
+    }).then((bids) => {
+        console.log('bibs found =>', bids);
+        res.render('bids/list', { bids });
+    }).catch(next);
 };
 
 module.exports.create = (req, res, next) => {

@@ -3,6 +3,11 @@
   <h1>Bid listing</h1>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
 </section>
+<form action="/bids" method="get" >
+  <label for="distance">Bid distance: </label>
+  <input type="range" max="100000" min="0" step="100" value="5000" name="distance">
+  <button type="submit">Search</button>
+</form>
 
 <section>
   {{#if bids}}
